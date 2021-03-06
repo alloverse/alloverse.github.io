@@ -41,7 +41,7 @@ What are the actual bytes travelling on the wire? They all seem to be json paylo
 
 Version 0 implements this packet as:
 
-```
+```json-doc
 {
   "cmd": "interact",
   "interact": {
@@ -81,7 +81,7 @@ that stupid newline at the end.
 - Kind: Unreliable
 - Payload:
 
-```
+```json-doc
 {
   "client_clock": 123.0,
   "server_clock": 456.0

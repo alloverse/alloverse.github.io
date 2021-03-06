@@ -14,7 +14,7 @@ and on the server at the server heart rate.
 
 Format of the packet on-wire today:
 
-```
+```json-doc
 {
   "cmd": "intent",
   "intent": {
@@ -58,7 +58,7 @@ To understand `ack_state_rev`, see (state.md)[state.md].
 
 Planned version of the packet:
 
-```
+```json-doc
 {
     "intents": {
         "{entity id of avatar}": {
