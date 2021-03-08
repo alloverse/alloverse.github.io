@@ -2,8 +2,9 @@
 layout: default
 title: Modules
 nav_order: 6
-#--has_children: true
 sidebar_header: AlloNet
+has_children: true
+starts_active: true
 ---
 
 # {{ page.title }}

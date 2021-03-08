@@ -2,8 +2,9 @@
 layout: default
 title: Classes
 nav_order: 5
-has_children: true
 sidebar_header: AlloUI
+has_children: true
+starts_active: true
 ---
 
 # {{ page.title }}
