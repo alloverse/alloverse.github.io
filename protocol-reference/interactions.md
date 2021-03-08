@@ -23,7 +23,7 @@ announce will lead to force disconnect.
 - Type: `request`
 - Request body:
 
-```
+```json-doc
 [
   "announce",
   "version",
@@ -41,7 +41,7 @@ announce will lead to force disconnect.
 
 - Response:
 
-```
+```json-doc
 [
   "announce",
   "{ID of avatar entity}",
@@ -55,7 +55,7 @@ announce will lead to force disconnect.
 - Type: `request`
 - Request body:
 
-```
+```json-doc
 [
   "spawn_entity",
   {
@@ -76,7 +76,7 @@ announce will lead to force disconnect.
 
 - Response:
 
-```
+```json-doc
 [
   "spawn_entity",
   "{ID of entity if spawned}"
@@ -89,7 +89,7 @@ announce will lead to force disconnect.
 - Type: `request`
 - Request body:
 
-```
+```json-doc
 [
   "remove_entity",
   "{ID of entity to remove}",
@@ -102,7 +102,7 @@ announce will lead to force disconnect.
 
 - Response:
 
-```
+```json-doc
 [
   "remove_entity",
   "ok"
@@ -115,7 +115,7 @@ announce will lead to force disconnect.
 - Type: `request`
 - Request body:
 
-```
+```json-doc
 [
   "change_components",
   "{entity ID}",
@@ -133,7 +133,7 @@ announce will lead to force disconnect.
 
 Response:
 
-```
+```json-doc
 [
   "change_components",
   "ok"
@@ -149,7 +149,7 @@ whose component you're changing, but this rule can be changed.
 - Type: `request`
 - Request body for subscribe:
 
-```
+```json-doc
 [
   "subscribe",
   """{guard pattern}"""
@@ -158,7 +158,7 @@ whose component you're changing, but this rule can be changed.
 
 - Response:
 
-```
+```json-doc
 [
   "subscribe",
   "{subscription ID}"
@@ -167,7 +167,7 @@ whose component you're changing, but this rule can be changed.
 
 - Unsubscribe request body:
 
-```
+```json-doc
 [
   "unsubscribe",
   "{subscription ID}"
@@ -176,7 +176,7 @@ whose component you're changing, but this rule can be changed.
 
 - Response:
 
-```
+```json-doc
 [
   "unsubscribe",
   "{'ok'|'not_subscribed'}"
@@ -185,7 +185,7 @@ whose component you're changing, but this rule can be changed.
 
 - Example:
 
-```
+```json-doc
   [
     "interaction",
     "request",
@@ -227,7 +227,7 @@ on itself someone is pointing.
 - Type: `one-way`
 - Body:
 
-```
+```json-doc
 [
   "point",
   [1.0, 2.0, 3.0], // finger tip in world space coordinates
@@ -239,7 +239,7 @@ If the ray cast from the user's finger veers off the last pointed-at
 entity, one last message is sent to indicate that the user has stopped
 pointing at it. This is useful for removing highlight effect, etc.
 
-```
+```json-doc
 [
   "point-exit"
 ]
@@ -259,7 +259,7 @@ sender's user can understand if and why poking failed.
 - Type: `request`
 - Request body:
 
-```
+```json-doc
 [
   "poke",
   {true|false} // whether poking started (true) or stopped (false)
@@ -268,7 +268,7 @@ sender's user can understand if and why poking failed.
 
 - Success response:
 
-```
+```json-doc
 [
   "poke",
   "ok"
@@ -277,7 +277,7 @@ sender's user can understand if and why poking failed.
 
 - Failure response:
 
-```
+```json-doc
 [
   "poke",
   "failed",
@@ -298,7 +298,7 @@ Only audio, and only mono opus, is supported right now.
 - Type: `request`
 - Request body:
 
-```
+```json-doc
 [
   "allocate_track",
   "audio", # media type
@@ -310,7 +310,7 @@ Only audio, and only mono opus, is supported right now.
 
 - Success response:
 
-```
+```json-doc
 [
   "allocate_track",
   "ok",
@@ -320,7 +320,7 @@ Only audio, and only mono opus, is supported right now.
 
 - Failure response:
 
-```
+```json-doc
 [
   "allocate_track",
   "failed",

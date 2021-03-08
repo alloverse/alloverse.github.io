@@ -41,7 +41,7 @@ across connections and places without a central identity authority server.
 
 Identity is currently expressed as the following JSON blob:
 
-```
+```json-doc
 {
     "display_name": "annie"
 }
@@ -55,7 +55,7 @@ else is specified as a set of components.
 
 JSON specification:
 
-```
+```json-doc
 {
     "id": "1234",
     "components": {
@@ -123,7 +123,7 @@ See [intent](intent).
 Sent from agent, to place, then forwarded to the designated agent,
 over the reliable channel on demand.
 
-```
+```json-doc
   [
     "interaction",
     "{oneway|request|response|publication}"
@@ -193,7 +193,7 @@ Interaction ACLs guard on the entire interaction message,
 and not just the payload body. So for example, the following
 rule would disallow users named "harry" from joining a room:
 
-```
+```json-doc
 [
   "deny",
   """[
@@ -217,7 +217,7 @@ expression.
 If an interaction is sent by an agent but is disallowed by an ACL
 rule, the following message is sent in response:
 
-```
+```json-doc
 [
   "interaction_denied",
   // original interaction goes here,

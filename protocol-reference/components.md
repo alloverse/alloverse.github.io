@@ -20,7 +20,7 @@ entity if it has one; otherwise relative to the world origo.
 See [Coordinate System](coordinate-system) for an extended description of how
 things are positioned and oriented in Alloverse.
 
-```
+```json-doc
 "transform": {
   "matrix": [1.0,0.0,0.0,0.0, 0.0,1.0,0.0,0.0, 0.0,0.0,1.0,0.0, 0.0,0.0,0.0,1.0]
 }
@@ -38,7 +38,7 @@ but until we have assets, geometry is encoded in-line in entity description.
 
 You also need to implement the client asset callbacks in order to respond to asset requests in order to deliver the asset.
 
-```
+```json-doc
 "geometry": {
   "type": "asset",
   "name": "asset:sha256:d2a84f4b8b650937ec8f73cd8be2c74add5a911ba64df27458ed8229da804a26"
@@ -48,7 +48,7 @@ You also need to implement the client asset callbacks in order to respond to ass
 **If type is `hardcoded-model`**, you're using one of the models hard-coded
 into the visor. `name` is the name of the model.
 
-```
+```json-doc
 "geometry": {
   "type": "hardcoded-model",
   "name": "hand"
@@ -63,7 +63,7 @@ This is only recommended for debugging, and until we have geometry assets.
 - `uvs` is an optional list of lists, each sub-list containing the u, v texture coordinates at the corresponding vertex.
 - `triangles` is a required list of lists. Each sub-list is three integers, which are indices into the above arrays, forming a triangle.
 
-```
+```json-doc
 "geometry": {
   "type": "inline",
   "vertices": [[1.0, 1.0, 1.0], [2.0, 2.0, 2.0], [3.0, 3.0, 3.0], [4.0, 4.0, 4.0]],
@@ -79,7 +79,7 @@ This is only recommended for debugging, and until we have geometry assets.
 
 Defines the surface appearance of the component being rendered.
 
-```
+```json-doc
 "material": {
   "color": [1.0, 1.0, 0.0, 1.0],
   "shader_name": "plain",
@@ -95,7 +95,7 @@ Defines the surface appearance of the component being rendered.
 
 Defines a text renderer for this entity, drawing a text texture at `transform`.
 
-```
+```json-doc
 "text": {
   "string": "hello world",
   "height": 0.03,
@@ -112,7 +112,7 @@ Defines a text renderer for this entity, drawing a text texture at `transform`.
 
 Defines the physical shape of an entity.
 
-```
+```json-doc
 "collider": {
   "type": "box",
   "width": 1,
@@ -125,7 +125,7 @@ Defines the physical shape of an entity.
 
 Specify the relationships between entities, in particular child entites' "parent" entity. If an entity has a parent, its transform should be concatenated with all its ancestors' transforms before being displayed.
 
-```
+```json-doc
 "relationships": {
   "parent": "abc123"
 }
@@ -138,7 +138,7 @@ Specify how the entity's owning agent's intent affects this entity.
 - `actuate_pose`: this named pose will be set as this entity's transform each frame.
 - `from_avatar` (optional): Instead of following the owning agent's intents, follow the agent who has this entity as its avatar.
 
-```
+```json-doc
 "intent": {
   "actuate_pose": "hand/left",
   "from_avatar": "abc123"
@@ -153,7 +153,7 @@ moved/dragged by a user.
 The actual grabbing is accomplished using intents.
 See the field `grab` under [intent](intent).
 
-```
+```json-doc
 "grabbable": {
   "actuate_on": "...",
 
@@ -197,7 +197,7 @@ to `place` to add a `live-media` component to your entity.
 - `channel_count`: For audio: only 1 mono channel supported
 - `format`: Only "opus" audio supported
 
-```
+```json-doc
 "live_media": {
   "track_id": 0, // filled in by server
   "sample_rate": 48000, //
@@ -211,7 +211,7 @@ to `place` to add a `live-media` component to your entity.
 Only set on the entity `place`, this component defines the flow of time
 for a place.
 
-```
+```json-doc
 "clock": {
   "time": 123.0, // in seconds
 }
@@ -223,7 +223,7 @@ Its reference time is undefined. It is always seconds as a double.
 
 Defines a custom cursor renderer, controlling the appearence of the cursor displayed when pointing at the entity.
 
-```
+```json-doc
 "cursor": {
   "name": "brushCursor",
   "size": 3,

@@ -14,7 +14,7 @@ on unreliable channel 0.
 
 The world representation is stored as a big JSON document like so:
 
-```
+```json-doc
 {
   "entities": {
     "abc123": {
@@ -48,7 +48,7 @@ The packet on channel 0 received in the client can take three forms:
 
 If the server is unable to diff, it will just send the full world state document.
 
-```
+```json-doc
 {
   "patch_style": "set",
   "entities": ...,
@@ -64,7 +64,7 @@ the document is stored to history.
 Indicates that the payload is an [RFC 6902](https://tools.ietf.org/html/rfc6902)
 JSON Patch.
 
-```
+```json-doc
 {
   "patch_style": "apply",
   "patch_from": 1233,
@@ -88,7 +88,7 @@ so its support is likely to be removed.
 Indicates that the payload is an [RFC 7386](https://tools.ietf.org/html/rfc7396)
 JSON Merge Patch.
 
-```
+```json-doc
 {
   "patch_style": "merge",
   "patch_from": 1233,
@@ -109,7 +109,7 @@ you should set intent's `ack_state_rev` back to 0 to request a full `set` state.
 Version 1 sent the complete world-state as is, and with entities as an array rather
 than an object. It looked like this:
 
-```
+```json-doc
 entities: [
   // list of all entities; see Entities above for structure
 ],

@@ -130,11 +130,13 @@ to spawn the given appliance.
 The alloplace server should then make the http(s) call to the given URL with a
 connection instruction json blob:
 
+```json-doc
     {
       "spawnInPlace": "alloplace://hostname:port",
       "onBehalfOf": (client identity),
       "query": (query params as-is from the alloapp url)
     }.
+```
 
 The http server receiving this request should then spawn a process for this
 agent and have it connect to the `spawnInPlace` URL. See [the implementation
