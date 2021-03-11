@@ -93,28 +93,8 @@ Let’s open up `lua/main.lua` and have a look at the code, to understand what's
 
 {% highlight lua %}
 local client = Client(
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-    arg[2], 
-arg[2],
-"allo-todo2"
+    arg[2],
+    "allo-todo2"
 )
 local app = App(client)
 {% endhighlight %}
