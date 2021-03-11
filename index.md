@@ -20,9 +20,11 @@ nav_order: 1
 {:toc}
 </details>
 
+## What is Alloverse?
+
 Alloverse is an open platform for collaborative workspaces in 3D. It’s Gibson style Cyberspace, but for your day-to-day work and play, with your friends and colleagues. It’s a VR and AR platform for creating spaces, and for running real applications within those spaces, together with other people.
 
-Please see the public website for more information.
+Please see the [Alloverse website](https://www.alloverse.com) for more information.
 
 In nerd terms, it's a VR/AR/3D "window manager" and collaborative workspace.
 
@@ -68,12 +70,11 @@ The curl’d script will have created this project structure for you:
 
 ## Trying your app out
 
-That’s it! You should now be able to start your project and see it appear in an Alloplace. If you don’t have one already, you can get or rent a Place at [places.alloverse.com](places.alloverse.com/), boot one on your own (`docker run -e ALLOPLACE_NAME="my place" -p 21337:21337/udp -it alloverse/alloplace`), or just use our playground [alloplace://nevyn.places.alloverse.com](alloplace://nevyn.places.alloverse.com/). I'm gonna do the latter:
+That’s it! You should now be able to start your project and see it appear in an Alloplace. If you don’t have one already, you can <!--get or rent a Place at [places.alloverse.com](places.alloverse.com/),--> boot one on your own (`docker run -e ALLOPLACE_NAME="my place" -p 21337:21337/udp -it alloverse/alloplace`), or just use our playground [alloplace://nevyn.places.alloverse.com](alloplace://nevyn.places.alloverse.com/). I'm gonna do the latter:
 
 {% highlight terminal %}
 $ ./allo/assist run alloplace://nevyn.places.alloverse.com
 {% endhighlight %}
-
 
 If it all checks out, you should be able to jump into that place on your VR headset and press the button it has created.
 
@@ -92,13 +93,33 @@ Let’s open up `lua/main.lua` and have a look at the code, to understand what's
 
 {% highlight lua %}
 local client = Client(
+arg[2],
     arg[2], 
-    "allo-todo2"
+arg[2],
+    arg[2], 
+arg[2],
+    arg[2], 
+arg[2],
+    arg[2], 
+arg[2],
+    arg[2], 
+arg[2],
+    arg[2], 
+arg[2],
+    arg[2], 
+arg[2],
+    arg[2], 
+arg[2],
+    arg[2], 
+arg[2],
+    arg[2], 
+arg[2],
+"allo-todo2"
 )
 local app = App(client)
 {% endhighlight %}
 
-Above, we're using a [Client](/doc/classes/Client.html) to connect this app to a Place. `arg[2]` is the URL of the place to connect to, which Assist sets up for you in boot.lua. [App](/doc/classes/App.html) then manages the Client connection for you, and manages the lifetime of your app.
+Above, we're using a Client to connect this app to a Place. `arg[2]` is the URL of the place to connect to, which Assist sets up for you in boot.lua. App then manages the Client connection for you, and manages the lifetime of your app.
 
 {% highlight lua %}
 assets = {
@@ -121,8 +142,9 @@ Your application is represented by a hierarchy of views. If you're a web develop
 `app.mainView` is the main UI for your app. You should set it up with your main user interface before connecting to the Place.
 
 `Bounds` is the position and size of your object:
-* The first three numbers are the x, y and z position ([see coordinate space reference](/protocol-reference/coordinate-system)), and in this case they mean this view is centered horizontally; its base is 1.2 meters up from the floor; and -2 means 2 meters into the Place, depth-wise. 
-* The second group of three numbers is the width, depth and height. Here, we're 1 meter wide, half a meter wide, and one centimeter deep.
+
+- The first three numbers are the x, y and z position ([see coordinate space reference](/protocol-reference/coordinate-system)), and in this case they mean this view is centered horizontally; its base is 1.2 meters up from the floor; and -2 means 2 meters into the Place, depth-wise.
+- The second group of three numbers is the width, depth and height. Here, we're 1 meter wide, half a meter wide, and one centimeter deep.
 
 We also make the main view `grabbable`, so the user can move it around the Place. Alternatively, you can add a GrabHandle, which acts like the title bar of a desktop UI's window.
 
@@ -156,18 +178,18 @@ Let's make a todo list app! I'm a master artist, so I've painted this piece of a
 
 So we've got:
 
-* A list of items to check off,
-* A button to add an item
-* A dialog that pops up where you can name your item.
+- A list of items to check off,
+- A button to add an item
+- A dialog that pops up where you can name your item.
 
 Sounds great. Let's get started.
 
 Note: This is where we start coding for real.
 {: .label .label-green }
 
-Select everything from `local mainView = ...` down to `app.mainView = mainView` and delete it, and we'll write some new, fun code.
+Select everything from (and including) `local mainView = ...` down to `app.mainView = mainView` and delete it, and we'll write some new, fun code.
 
-Instead of having a bunch of loose views strewn around the code, I enjoy creating a class for each main container of UI. Some equivalent of a "window", or "view controller", or "component" if you will. Let's create a `TodosView`, which will display the list of items, and allow you to quit the app, and add new items.
+Instead of having a bunch of loose views strewn around the code, I enjoy creating a class for each main container of UI. Some equivalent of a "window", or "view controller", or "component" if you will. Let's create a `TodosView`, which will display the list of items, and allow you to quit the app, and add new items. Copy the code block below, and paste it between `app.assetManager:add(assets)` and `app:connect()`.
 
 {% highlight lua %}
 
@@ -191,12 +213,12 @@ function TodosView:_init(bounds)
     self.addButton.onActivated = function(hand)
         self:showNewTodoPopup(hand)
     end
-    
+
     self.todoViews = {}
 
     self:layout()
-end
 
+end
 
 {% endhighlight %}
 
@@ -257,24 +279,24 @@ function TodosView:showNewTodoPopup(hand)
     end
 
     app:openPopupNearHand(popup, hand)
+
 end
 
 {% endhighlight %}
 
 Phew, that's a handful. Let's step through it.
 
-* `popup` is our new popup window. It's another surface, one meter by a half.
-* To it, we add a [TextField](/doc/classes/TextField.html)! This is your standard issue text input view. Tapping it will focus it, which will display a virtual keyboard to the user (or if you have a hardware keyboard, you can just use that).
-* We want to close the popup both when the return key is pressed, and when you manually tap the "Add" button, so let's create a callback we can use for both called `done`.
-* `onReturn` is used to react to return/enter key, and we can also use it to make sure a newline character isn't added to the text.
-* `showNewTodoPopup` has been called with a `hand`. That's the hand of the user that tapped the "Add todo button". It belongs to an avatar, so we can actually ask the avatar if it would pretty please focus this text field, so the user can begin typing in it directly? If you'd be so kind.
-* The `addButton` uses the same `done` callback as `onReturn`
-* `cancelButton` just closes the popup, no questions asked.
-* Finally, `app:openPopupNearHand` will display our new fancy popup 60 centimeters away from the user's hand, which is a convenient distance at which to do your job.
+- `popup` is our new popup window. It's another surface, one meter by a half.
+- To it, we add a [TextField](/doc/classes/TextField.html)! This is your standard issue text input view. Tapping it will focus it, which will display a virtual keyboard to the user (or if you have a hardware keyboard, you can just use that).
+- We want to close the popup both when the return key is pressed, and when you manually tap the "Add" button, so let's create a callback we can use for both called `done`.
+- `onReturn` is used to react to return/enter key, and we can also use it to make sure a newline character isn't added to the text.
+- `showNewTodoPopup` has been called with a `hand`. That's the hand of the user that tapped the "Add todo button". It belongs to an avatar, so we can actually ask the avatar if it would pretty please focus this text field, so the user can begin typing in it directly? If you'd be so kind.
+- The `addButton` uses the same `done` callback as `onReturn`
+- `cancelButton` just closes the popup, no questions asked.
+- Finally, `app:openPopupNearHand` will display our new fancy popup 60 centimeters away from the user's hand, which is a convenient distance at which to do your job.
 
 Warning: incoming rant
 {: .label .label-yellow }
-
 
 The cool thing about this popup is that if you have multiple people in the room, they can all get their own input popup, so they can add their own items without interfering with each other. This is an important and unusual aspect of UI design and development: all your UI is real time collaborative, so you have to consider how your application behaves when multiple people use it at the same time.
 
@@ -319,6 +341,7 @@ function TodosView:addTodo(text)
     table.insert(self.todoViews, todoView)
     self:layout()
     self:addSubview(todoView)
+
 end
 
 function TodosView:removeTodo(todoView)
@@ -332,11 +355,11 @@ end
 
 This should start to look familiar.
 
-* `todoView` is the parent view of all the controls related to the todo list item. We store them in `self.todoViews` so we can layout them properly later.
-* `checkButton` is used to check off a completed item. We place it along the left edge, tell it to use our new fancy checkmark texture, and configure it to call an as-of-yet nonexistent `removeTodo` method.
-* `label` is the text label describing our item. Text is black (that's a list of Red, Green, Blue and Alpha, with components from 0.0 to 1.0), horizontally aligned to the left, with the text from the user.
-* We call `layout` so our new item is positioned correctly
-* And then we add it as a subview, yay!
+- `todoView` is the parent view of all the controls related to the todo list item. We store them in `self.todoViews` so we can layout them properly later.
+- `checkButton` is used to check off a completed item. We place it along the left edge, tell it to use our new fancy checkmark texture, and configure it to call an as-of-yet nonexistent `removeTodo` method.
+- `label` is the text label describing our item. Text is black (that's a list of Red, Green, Blue and Alpha, with components from 0.0 to 1.0), horizontally aligned to the left, with the text from the user.
+- We call `layout` so our new item is positioned correctly
+- And then we add it as a subview, yay!
 
 `removeTodo` just finds the given item in the list, and removes it from both the list and the UI, running a relayouting pass to adjust the other items' positions.
 
@@ -363,24 +386,24 @@ function TodosView:layout()
 
     self.bounds.size.height = height
     self:setBounds()
+
 end
 {% endhighlight %}
 
 Here's a pattern I've brought with me all the way back from building black-and-white Mac apps in the 80s: using a `pen` variable which represents a rectangle (or rather, a 3D box!) where we want to "stamp out" our UI, moving the pen as we walk through our items.
 
-* We want to adjust the height of our UI to exactly fit our items. Each item is 13 cm tall, and then there's 25 cm of padding for the "Add todos" button.
-* The add button's size is a perfect template for our pen. Let's start the pen at the bottom of the window and lay out controls bottom-to-top, and also move it out from the surface so that our elements sit ON TOP of the surface, instead of embedded in it.
-* Let's add 7 cm of initial padding
-* There. Stamp the pen's current state into the add button's bounds.
-* Add another 15 cm of padding.
-* Stamp the pen onto each todo item view, adding 13 cm of padding for each item.
-* Figure out the perfect new location for the quit button, and...
-* Set the height of the whole app to the one we calculated at the start, and update the bounds so it's reflected on the users' headsets.
+- We want to adjust the height of our UI to exactly fit our items. Each item is 13 cm tall, and then there's 25 cm of padding for the "Add todos" button.
+- The add button's size is a perfect template for our pen. Let's start the pen at the bottom of the window and lay out controls bottom-to-top, and also move it out from the surface so that our elements sit ON TOP of the surface, instead of embedded in it.
+- Let's add 7 cm of initial padding
+- There. Stamp the pen's current state into the add button's bounds.
+- Add another 15 cm of padding.
+- Stamp the pen onto each todo item view, adding 13 cm of padding for each item.
+- Figure out the perfect new location for the quit button, and...
+- Set the height of the whole app to the one we calculated at the start, and update the bounds so it's reflected on the users' headsets.
 
 You know what? I think this is pretty stellar. This'll do nicely. If you dotted every i, your app should look something like this:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/49U9tVUoeZU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 
 ## Deploying your app
 
@@ -392,6 +415,6 @@ We haven't gotten that for yet, though. Watch this space!
 
 ## Celebration
 
-If you made it this far, go eat a cinnamon roll, you deserve it. It's on me. Really, just [ping me on Discord](https://discord.gg/KhdMU6P6Uw) and it's yours. We'd at least love to hear from you, and see your creations. 
+If you made it this far, go eat a cinnamon roll, you deserve it. It's on me. Really, just [ping me on Discord](https://discord.gg/KhdMU6P6Uw) and it's yours. We'd at least love to hear from you, and see your creations.
 
 Once you make your own apps, even if you're not down with cinnamon rolls, do let us know, so we can feature your app in our app browser, blog and tweet about it, etc etc.
