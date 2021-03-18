@@ -26,7 +26,7 @@ parent: $(name[ldoc.module.kind] or "Other")
 		$(a) - $(b)
 #	end
 #end
-#
+
 #function map(t, f, pair)
 # pair = pair or ldoc.ipairs
 #  local r = {}
@@ -76,14 +76,17 @@ parent: $(name[ldoc.module.kind] or "Other")
 #  end
 #  return r
 #end
-#
+
+#-- The "header" of each API page i.e "module"
 #function module(m)
-#-- title
+#-- Page title
 #local title = self.display_name(m)
 $(title)
 $(rep("=", #title))
+#
 #-- summary
-*$(m.summary)*
+$(m.summary)
+#
 #-- description
 $(m.description)
 #
@@ -154,7 +157,7 @@ $(parameters)
 #end -- if params
 
 $("#### Returns")
-#
+
 #function returnRows() 
 #  local result = {}
 #  local count = 1
@@ -166,7 +169,6 @@ $("#### Returns")
 #  end
 #  return result
 #end
-#dir(f)
 #if f.retgroups then
 # local r = mdtable({"Type", "Description"}, returnRows())
 $(r)
