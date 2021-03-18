@@ -154,15 +154,22 @@ $(parameters)
 #end -- if params
 
 $("#### Returns")
-
-#if f.modifiers and f.modifiers["return"] and #f.modifiers["return"] > 0 then
-# local returns = mdtable({"Description"}, map(f.retgroups, function(k,v) 
-#  return map(v, function(k,v)
-#    return v.text or "???"
-#    end)
-# end))
-$(returns)
-
+#
+#function returnRows() 
+#  local result = {}
+#  local count = 1
+#  for _, groups in ipairs(f.retgroups) do
+#    for group in groups:iter() do
+#      result[count] = {group.type, group.text}
+#      count = count + 1
+#    end
+#  end
+#  return result
+#end
+#dir(f)
+#if f.retgroups then
+# local r = mdtable({"Type", "Description"}, returnRows())
+$(r)
 #else
 *Nothing*
 #end
