@@ -2,7 +2,7 @@
 layout: default
 title: 3D Human Interface Guidelines
 permalink: /hig
-nav_order: 4
+nav_order: 9
 ---
 
 # {{ page.title }}

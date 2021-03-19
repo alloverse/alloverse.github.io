@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Official Components
-permalink: /protocol-reference/official-components
-parent: Protocol Reference
+title: Components
+permalink: /components
+nav_order: 4
 ---
 
 # {{ page.title }}
@@ -17,7 +17,7 @@ components official by opening an issue on this repo.
 
 Defines the physical location and orientation of the entity relative to its parent
 entity if it has one; otherwise relative to the world origo.
-See [Coordinate System](coordinate-system) for an extended description of how
+See [Coordinate System](protocol-reference/coordinate-system) for an extended description of how
 things are positioned and oriented in Alloverse.
 
 ```json-doc
@@ -151,7 +151,7 @@ Describes how an entity maybe grabbed/held, and then
 moved/dragged by a user.
 
 The actual grabbing is accomplished using intents.
-See the field `grab` under [intent](intent).
+See the field `grab` under [intent](protocol-reference/intent).
 
 ```json-doc
 "grabbable": {
@@ -188,7 +188,7 @@ from the location of that entity.
 Please do not try to create live-media components manually. They must be
 allocated server-side so that the server can allocate a track stream in
 the network protocol. Instead, send
-[allocate_track](interactions#entity-wishes-to-transmit-live-media)
+[allocate_track](/protocol-reference/interactions#entity-wishes-to-transmit-live-media)
 to `place` to add a `live-media` component to your entity.
 
 - `track_id`: `CHANNEL_MEDIA` track number that corresponds to what this
