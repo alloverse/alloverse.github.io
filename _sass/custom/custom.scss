@@ -88,6 +88,22 @@ code {
   color: $grey-dk-200;
 }
 
+// Tables for arguments & returns
+.table-wrapper {
+  thead {
+    text-align: left;
+
+    th {
+      background: #f6f6f6;
+    }
+  }
+}
+
+// Fulhack selector for the return field's "nothing" label
+// #returns + p {
+//   color: #808080;
+// }
+
 // Print-only styles.
 @media print {
   .side-bar,

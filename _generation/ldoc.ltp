@@ -136,7 +136,7 @@ $(f.description)
 $("### "..self.display_name(f))
 #
 #-- summary
-*$(f.summary)*
+$(f.summary)
 #-- description
 $(f.description)
 #-- parameters
