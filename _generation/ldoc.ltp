@@ -96,13 +96,30 @@ $("## Classes")
 #    class(c)
 #  end
 #end
-#
+
+
 #if m.kinds.Methods then
+
+#--if m's Methods contains one called _init*, create a new h2 header for it and call it "Constructor"  
+#local constructorMethodIndex
+#  for c in m.kinds.Methods() do
+#    local fullMethodName = self.display_name(c)
+#    local methodName = fullMethodName:sub(#title+2, #title+6)
+#    if (methodName == "_init") then
+#      constructorMethodIndex = c
+
+$("## Constructor")
+
+#      method(c, true)
+#    end
+#  end
 
 $("## Methods")
 
 #  for c in m.kinds.Methods() do
-#    method(c)
+#    if c ~= constructorMethodIndex then
+#      method(c)
+#    end
 #  end
 #end
 #
@@ -130,10 +147,12 @@ $(f.description)
 #-- instance methods
 #end
 #
-#function method(f)
+#function method(f, isConstructor)
 #
 #-- signature
+# if not isConstructor then
 $("### "..self.display_name(f))
+#end
 #
 #-- summary
 $(f.summary)
@@ -153,7 +172,7 @@ $("#### Arguments")
 #  end))
 $(parameters)
 #else
-*None*
+<span class="returns-nothing">None</span>
 #end -- if params
 
 $("#### Returns")
@@ -173,7 +192,7 @@ $("#### Returns")
 # local r = mdtable({"Type", "Description"}, returnRows())
 $(r)
 #else
-*Nothing*
+<span class="returns-nothing">Nothing</span>
 #end
 
 --- 

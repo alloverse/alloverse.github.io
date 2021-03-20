@@ -99,10 +99,10 @@ code {
   }
 }
 
-// Fulhack selector for the return field's "nothing" label
-// #returns + p {
-//   color: #808080;
-// }
+.returns-nothing {
+  color: #aaaaaa;
+  font-style: italic;
+}
 
 // Print-only styles.
 @media print {
