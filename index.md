@@ -22,11 +22,9 @@ nav_order: 1
 
 ## What is Alloverse?
 
-Alloverse is an open platform for collaborative workspaces in 3D. It’s Gibson style Cyberspace, but for your day-to-day work and play, with your friends and colleagues. It’s a VR and AR platform for creating spaces, and for running real applications within those spaces, together with other people.
+Alloverse is an open platform for collaborative workspaces in 3D. It’s Gibson style Cyberspace, but for your day-to-day work and play, with your friends and colleagues. It’s a VR and AR platform for creating spaces, and for running real applications within those spaces, together with other people. In nerd terms, it's a VR/AR/3D "window manager" and collaborative workspace.
 
-Please see the [Alloverse website](https://www.alloverse.com) for more information.
-
-In nerd terms, it's a VR/AR/3D "window manager" and collaborative workspace.
+For more information, please see the [Alloverse website](https://www.alloverse.com).
 
 Your "place" is where you decorate, run apps, invite people, and hang out. It's like a collaborative X11 server: It runs a world simulation server, a voip gateway, and all the backing data for 3d UIs for the running apps. The reference Elixir implementation is in alloplace.
 A "visor" is the GUI application you use to visit places and interact with your apps. allovisor implements such a visor for VR in Unity.
@@ -347,7 +345,7 @@ That's awesome! We can now add and remove todo list items! Just one bummer: they
 
 {% highlight lua %}
 function TodosView:layout()
-    local height = #self.todoViews * 0.13 + 0.25
+local height = #self.todoViews \* 0.13 + 0.25
 
     local pen = ui.Bounds{
         size=self.addButton.bounds.size:copy(),

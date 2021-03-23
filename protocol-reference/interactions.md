@@ -289,7 +289,7 @@ sender's user can understand if and why poking failed.
 
 Before an entity can transmit streamed audio, video or geometry, a track must be created
 along which to send that data. This interaction will add a
-[live_media](official-components#live-media)
+[live_media](/components#live-media)
 component to the sender's entity.
 
 Only audio, and only mono opus, is supported right now.

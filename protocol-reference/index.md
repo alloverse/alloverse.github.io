@@ -10,11 +10,11 @@ has_children: true
 
 # Terminology
 
-Please begin by reading the [architecture documentation](../architecture),
+Please begin by reading the [architecture documentation](/concepts/architecture),
 as it explains how all these components fit together.
 
 To see how these messages actually sent over the network, see
-[Wire protocol](wire-protocol.md). This document also specifies the differences
+[Wire protocol](wire-protocol). This document also specifies the differences
 between the specification and the current implementation.
 
 ## Agent
@@ -76,8 +76,7 @@ A component describes an aspect of an entity, such as:
 - `mesh`: description of its physical geometry
 - etc...
 
-Alloverse defines **a set of [official component
-specifications](official-components)**. App developers are free
+Alloverse defines **a set of official [components](/components)**. App developers are free
 to invent their own components, which is useful for
 app-to-app communication (though a standard Visor will
 not be able to interpret them).
@@ -104,8 +103,8 @@ requesting something from one entity to another (sent by
 the requesting entity's agent, and handled by the receiving
 entity's agent).
 
-Alloverse defines **a set of
-[official interactions](interactions)**. App developers
+Alloverse defines **a set of official
+[interactions](interactions)**. App developers
 are free to invent their own interactions, which is useful for
 app-to-app communication (though a standard Visor will
 not be able to interpret them).
@@ -116,7 +115,7 @@ not be able to interpret them).
 
 Agent to place per-frame message.
 
-See [intent](intent).
+See [Intent](intent).
 
 ## Entity to entity interaction (request/response/pubsub)
 
@@ -235,15 +234,13 @@ See [State Diffs](state-diffs) for full format and explanation, and
 
 # Official components
 
-Please see the [list of official components](official-components) in
-a separate document. These are defined by alloplace,
-and define how an agent and entity interact with a place.
+Please see the [list of official components](/components).
+These are defined by alloplace, and define how an agent and entity interact with a place.
 
 # Official interactions
 
-Please see the [list of official interactions](interactions) in
-a separate document. These are defined by alloplace,
-and define how an agent and entity interact with a place.
+Please see the [list of official interactions](interactions).
+These are defined by alloplace, and define how an agent and entity interact with a place.
 
 # HTTP Endpoints
 

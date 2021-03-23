@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Alloverse Architecture
+title: Architecture
 permalink: /concepts/architecture
-parent: Concepts
+nav_order: 3
 ---
 
 # {{ page.title }}
@@ -48,7 +48,7 @@ An alternative plan has been to use WebRTC as the transport for free TLS, ICE, u
 
 ## Entities and the place state
 
-Entities are things in the world, represented in a scene graph. An entity has only an "id" and a list of components. There is a [list of specifications for official components](/protocol-reference/official-components). Apps may invent additional components without them having to be part of the standard.
+Entities are things in the world, represented in a scene graph. An entity has only an "id" and a list of components. There is a [list of specifications for official components](/components). Apps may invent additional components without them having to be part of the standard.
 
 ## Interactions and access control
 

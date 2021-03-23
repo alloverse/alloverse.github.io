@@ -2,7 +2,7 @@
 layout: default
 title: $(ldoc.module and ldoc.display_name(ldoc.module) or "Index")
 # if ldoc.module then 
-# local name = {classes = "Classes", modules = "Modules"}
+# local name = {classes = "AlloUI lua", modules = "Modules"}
 parent: $(name[ldoc.module.kind] or "Other")
 # end
 ---
