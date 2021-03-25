@@ -14,7 +14,7 @@ Please begin by reading the [architecture documentation](/concepts/architecture)
 as it explains how all these components fit together.
 
 To see how these messages actually sent over the network, see
-[Wire protocol](wire-protocol). This document also specifies the differences
+[Wire Protocol](wire-protocol). This document also specifies the differences
 between the specification and the current implementation.
 
 ## Agent
@@ -94,7 +94,7 @@ it's relevant.
 The blob is also used to send housekeeping information
 such as acknowledging receipt of state diffs.
 
-See [intent](intent).
+See [Intent](intent).
 
 ## Interaction
 
@@ -104,7 +104,7 @@ the requesting entity's agent, and handled by the receiving
 entity's agent).
 
 Alloverse defines **a set of official
-[interactions](interactions)**. App developers
+[Interactions](interactions)**. App developers
 are free to invent their own interactions, which is useful for
 app-to-app communication (though a standard Visor will
 not be able to interpret them).
