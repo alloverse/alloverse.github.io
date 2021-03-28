@@ -206,6 +206,45 @@ to `place` to add a `live-media` component to your entity.
 }
 ```
 
+## `sound-effect`
+
+Play a sound emanating from this entity, based on a sound asset.
+
+Supported file formats:
+* .ogg
+* .mp3
+* .wav
+
+Visors will load the sound asset upon encountering it. It won't play
+until the `starts_at` field is set and server clock reaches that time.
+
+It is recommended that you _first_ create and publish this entity
+without the `starts_at` field so that visors cache it, and only later
+sets a starts_at time so that it's more likely to be loaded by the
+time it's played.
+
+* `asset`: ID of the asset to play. (required)
+* `starts_at`: The server clock time at which to start playing. Set to nil
+  to just load but not play at this time. (optional, default nil)
+* `loop_count`: How many times should it loop? 0 means no looping (optional, default 0).
+* `offset`: Skip `n` seconds of audio into the file. (optional, default 0, not implemented yet)
+* `length`: Play only `n` seconds of audio from the file, skipping the rest of
+  the file before ending or looping. (optional, default false, not implemented yet)
+* `volume`: Playback volume (optional, default full volume 1.0)
+
+
+```json-doc
+"sound-effect": {
+  "asset": "asset:sha256:blabla",
+  "starts_at": 12345.005,
+  "loop_count": 2,
+  "offset": 3.0,
+  "length": 5.56,
+  "volume": 1.0,
+}
+```
+
+
 ## `clock`
 
 Only set on the entity `place`, this component defines the flow of time
