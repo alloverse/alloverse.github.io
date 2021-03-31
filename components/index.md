@@ -179,9 +179,9 @@ See the field `grab` under [intent](protocol-reference/intent).
   rotation along Y (so that it always stays up-right),
   use: `"rotation_constraint": [0, 1, 0]`.
 
-## `live-media`
+## `live_media`
 
-The entity that holds a `live-media` component for a specific track
+The entity that holds a `live_media` component for a specific track
 is the entity that "plays" that track; e g for audio, audio will be played
 from the location of that entity.
 
@@ -189,7 +189,7 @@ Please do not try to create live-media components manually. They must be
 allocated server-side so that the server can allocate a track stream in
 the network protocol. Instead, send
 [allocate_track](/protocol-reference/interactions#entity-wishes-to-transmit-live-media)
-to `place` to add a `live-media` component to your entity.
+to `place` to add a `live_media` component to your entity.
 
 - `track_id`: `CHANNEL_MEDIA` track number that corresponds to what this
   entity should play back
@@ -206,7 +206,7 @@ to `place` to add a `live-media` component to your entity.
 }
 ```
 
-## `sound-effect`
+## `sound_effect`
 
 Play a sound emanating from this entity, based on a sound asset.
 
@@ -231,6 +231,7 @@ time it's played.
 * `length`: Play only `n` seconds of audio from the file, skipping the rest of
   the file before ending or looping. (optional, default false, not implemented yet)
 * `volume`: Playback volume (optional, default full volume 1.0)
+* `finish_if_orphaned`: Keep playing the sound to finish even if the component or entity is removed
 
 
 ```json-doc
