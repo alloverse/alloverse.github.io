@@ -159,6 +159,7 @@ See the field `grab` under [intent](protocol-reference/intent).
 
   "translation_constraint": [1, 1, 1],
   "rotation_constraint": [1, 1, 1],
+  "target_hand_transform": [1, 0, 0, 0, 0, 1, .....],
 }
 ```
 
@@ -178,6 +179,11 @@ See the field `grab` under [intent](protocol-reference/intent).
   in the given euler axis in the actuated entity's local coordinate space. E g, to only allow
   rotation along Y (so that it always stays up-right),
   use: `"rotation_constraint": [0, 1, 0]`.
+- **`target_hand_transform`**: If omitted, the relationship between the hand and the target
+  object is kept constant throughout the grab. If set, the relationship between the hand
+  and the target is set to this 4x4 transformation matrix upon grabbing it. For example,
+  set this to the identity matrix to make an object move immediately into the user's hand
+  when grabbed.
 
 ## `live_media`
 
