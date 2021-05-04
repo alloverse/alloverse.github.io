@@ -42,6 +42,16 @@ You can build apps on Mac, Linux or Windows; but for the latter, you’ll need a
 
 In contrast to a web framework like Rails or Django, Alloverse doesn’t install any software onto your system. Instead, a project is completely self-contained within its project folder, and contains everything it needs to run.
 
+## Prerequisites
+
+To write Alloverse apps, you'll need the following:
+
+* [The Alloverse app](alloverse.com/download/).
+* Terminal app (preinstalled on Mac and Linux, separate install on Windows).
+* A plain text editor for code (We recommend Visual Studio Code).
+* Git (Comes with Xcode on Mac. If you just type `git` into a terminal, it'll ask to install it for you even without Xcode).
+* Only on Windows: Cygwin or MingW (this be a bit of a setup; we recommend doing this on a Mac or Linux).
+
 ## Creating your project
 
 First, create a project folder. Allo Assist requires Git to fetch all its dependencies, so we’ll init a Git repo in the folder. Then we can initialize the alloapp environment into it, and make sure it works:
