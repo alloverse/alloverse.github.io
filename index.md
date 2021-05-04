@@ -102,8 +102,8 @@ Let’s open up `lua/main.lua` and have a look at the code, to understand what's
 
 {% highlight lua %}
 local client = Client(
-arg[2],
-"allo-todo2"
+  arg[2],
+  "allo-todo2"
 )
 local app = App(client)
 {% endhighlight %}
@@ -112,7 +112,7 @@ Above, we're using a Client to connect this app to a Place. `arg[2]` is the URL 
 
 {% highlight lua %}
 assets = {
-quit = ui.Asset.File("images/quit.png"),
+  quit = ui.Asset.File("images/quit.png"),
 }
 app.assetManager:add(assets)
 {% endhighlight %}
@@ -141,7 +141,7 @@ We also make the main view `grabbable`, so the user can move it around the Place
 local button = ui.Button(ui.Bounds(0.0, 0.05, 0.05, 0.2, 0.2, 0.1))
 mainView:addSubview(button)
 button.onActivated = function()
-print("Hello!")
+  print("Hello!")
 end
 {% endhighlight %}
 
@@ -184,31 +184,29 @@ Instead of having a bunch of loose views strewn around the code, I enjoy creatin
 
 class.TodosView(ui.Surface)
 function TodosView:_init(bounds)
-self:super(bounds)
-self.grabbable = true
+  self:super(bounds)
+  self.grabbable = true
 
-    self.quitButton = self:addSubview(ui.Button(ui.Bounds{
-      size=ui.Size(0.12,0.12,0.05)
-    }))
-    self.quitButton:setDefaultTexture(assets.quit)
-    self.quitButton.onActivated = function()
-        app:quit()
-    end
+  self.quitButton = self:addSubview(ui.Button(ui.Bounds{
+    size=ui.Size(0.12,0.12,0.05)
+  }))
+  self.quitButton:setDefaultTexture(assets.quit)
+  self.quitButton.onActivated = function()
+      app:quit()
+  end
 
-    self.addButton = self:addSubview(ui.Button(ui.Bounds{
-      size=ui.Size(bounds.size.width*0.8,0.1,0.05)
-    }))
-    self.addButton.label:setText("Add todo")
-    self.addButton.onActivated = function(hand)
-        self:showNewTodoPopup(hand)
-    end
+  self.addButton = self:addSubview(ui.Button(ui.Bounds{
+    size=ui.Size(bounds.size.width*0.8,0.1,0.05)
+  }))
+  self.addButton.label:setText("Add todo")
+  self.addButton.onActivated = function(hand)
+    self:showNewTodoPopup(hand)
+  end
 
-    self.todoViews = {}
+  self.todoViews = {}
 
-    self:layout()
-
+  self:layout()
 end
-
 {% endhighlight %}
 
 We're using [Penlight's `class` macro](https://stevedonovan.github.io/Penlight/api/libraries/pl.class.html) to create classes. We inherit [ui.Surface](/doc/classes/Surface.html), which is like a [ui.View](/doc/classes/View.html) except it also draws a background, so our app gets a backdrop to rest our controls onto.
@@ -220,8 +218,8 @@ AlloUI doesn't have a comprehensive layout system instead, so we'll call our own
 {% highlight lua %}
 
 function TodosView:layout()
-self.quitButton.bounds:moveToOrigin():move( 0.52,0.25,0.025)
-self.addButton.bounds:moveToOrigin():move( 0, -0.15,0.025)
+  self.quitButton.bounds:moveToOrigin():move( 0.52,0.25,0.025)
+  self.addButton.bounds:moveToOrigin():move( 0, -0.15,0.025)
 end
 
 app.mainView = TodosView(ui.Bounds(0, 1.2, -2, 1, 0.5, 0.01))
@@ -239,36 +237,35 @@ Next up, let's create that popup used for inputting new items.
 {% highlight lua %}
 
 function TodosView:showNewTodoPopup(hand)
-local popup = ui.Surface(ui.Bounds{size=ui.Size(1,0.5,0.05)})
+  local popup = ui.Surface(ui.Bounds{size=ui.Size(1,0.5,0.05)})
 
-    local input = popup:addSubview(ui.TextField{
-        bounds= ui.Bounds{size=ui.Size(0.8,0.1,0.05)}:move(0, 0.15, 0.025)
-    })
-    local done = function()
-        self:addTodo(input.label.text)
-        popup:removeFromSuperview()
-    end
-    input.onReturn = function()
-        done()
-        return false
-    end
-    input:askToFocus(hand)
+  local input = popup:addSubview(ui.TextField{
+    bounds= ui.Bounds{size=ui.Size(0.8,0.1,0.05)}:move(0, 0.15, 0.025)
+  })
+  local done = function()
+    self:addTodo(input.label.text)
+    popup:removeFromSuperview()
+  end
+  input.onReturn = function()
+    done()
+    return false
+  end
+  input:askToFocus(hand)
 
-    local addButton = popup:addSubview(ui.Button(ui.Bounds{size=ui.Size(popup.bounds.size.width*0.8,0.1,0.05)}))
-    addButton.bounds:move(0, 0, 0.025)
-    addButton.label:setText("Add")
-    addButton.onActivated = done
+  local addButton = popup:addSubview(ui.Button(ui.Bounds{size=ui.Size(popup.bounds.size.width*0.8,0.1,0.05)}))
+  addButton.bounds:move(0, 0, 0.025)
+  addButton.label:setText("Add")
+  addButton.onActivated = done
 
-    local cancelButton = popup:addSubview(ui.Button(ui.Bounds{size=ui.Size(popup.bounds.size.width*0.8,0.1,0.05)}))
-    cancelButton:setColor({0.4, 0.4, 0.3, 1.0})
-    cancelButton.bounds:move(0, -0.15, 0.025)
-    cancelButton.label:setText("Cancel")
-    cancelButton.onActivated = function()
-        popup:removeFromSuperview()
-    end
+  local cancelButton = popup:addSubview(ui.Button(ui.Bounds{size=ui.Size(popup.bounds.size.width*0.8,0.1,0.05)}))
+  cancelButton:setColor({0.4, 0.4, 0.3, 1.0})
+  cancelButton.bounds:move(0, -0.15, 0.025)
+  cancelButton.label:setText("Cancel")
+  cancelButton.onActivated = function()
+    popup:removeFromSuperview()
+  end
 
-    app:openPopupNearHand(popup, hand)
-
+  app:openPopupNearHand(popup, hand)
 end
 
 {% endhighlight %}
@@ -302,8 +299,8 @@ Before we continue, we'll need another asset. Download ![](/assets/images/checkm
 
 {% highlight lua %}
 assets = {
-quit = ui.Asset.File("images/quit.png"),
-checkmark = ui.Asset.File("images/checkmark.png"),
+  quit = ui.Asset.File("images/quit.png"),
+  checkmark = ui.Asset.File("images/checkmark.png"),
 }
 {% endhighlight %}
 
@@ -311,33 +308,32 @@ Cool. Cool cool cool. Let's make it actually possible to add todo items, yeah?
 
 {% highlight lua %}
 function TodosView:addTodo(text)
-local todoView = ui.View(ui.Bounds{size=ui.Size(self.bounds.size.width*0.8,0.1,0.05)})
+  local todoView = ui.View(ui.Bounds{size=ui.Size(self.bounds.size.width*0.8,0.1,0.05)})
+  
+  local checkButton = todoView:addSubview(ui.Button(ui.Bounds{size=ui.Size(0.1, 0.1, 0.05)}))
+  checkButton.bounds:move(-self.bounds.size.width/2 + checkButton.bounds.size.width, 0, 0)
+  checkButton:setDefaultTexture(assets.checkmark)
+  checkButton.onActivated = function()
+    self:removeTodo(todoView)
+  end
 
-    local checkButton = todoView:addSubview(ui.Button(ui.Bounds{size=ui.Size(0.1, 0.1, 0.05)}))
-    checkButton.bounds:move(-self.bounds.size.width/2 + checkButton.bounds.size.width, 0, 0)
-    checkButton:setDefaultTexture(assets.checkmark)
-    checkButton.onActivated = function()
-        self:removeTodo(todoView)
-    end
+  local label = todoView:addSubview(ui.Label{
+    bounds= todoView.bounds:copy():inset(0.1, 0.05, 0):move(0.05, 0,0),
+    color= {0,0,0, 1},
+    halign= "left",
+    text= text
+  })
 
-    local label = todoView:addSubview(ui.Label{
-        bounds= todoView.bounds:copy():inset(0.1, 0.05, 0):move(0.05, 0,0),
-        color= {0,0,0, 1},
-        halign= "left",
-        text= text
-    })
-
-    table.insert(self.todoViews, todoView)
-    self:layout()
-    self:addSubview(todoView)
-
+  table.insert(self.todoViews, todoView)
+  self:layout()
+  self:addSubview(todoView)
 end
 
 function TodosView:removeTodo(todoView)
-local index = tablex.find(self.todoViews, todoView)
-table.remove(self.todoViews, index)
-todoView:removeFromSuperview()
-self:layout()
+  local index = tablex.find(self.todoViews, todoView)
+  table.remove(self.todoViews, index)
+  todoView:removeFromSuperview()
+  self:layout()
 end
 
 {% endhighlight %}
@@ -356,26 +352,25 @@ That's awesome! We can now add and remove todo list items! Just one bummer: they
 
 {% highlight lua %}
 function TodosView:layout()
-local height = #self.todoViews * 0.13 + 0.25
+  local height = #self.todoViews * 0.13 + 0.25
 
-    local pen = ui.Bounds{
-        size=self.addButton.bounds.size:copy(),
-        pose=ui.Pose(0, -height/2, self.addButton.bounds.size.depth/2)
-    }
-    pen:move(0, 0.07, 0)
-    self.addButton:setBounds(pen:copy())
-    pen:move(0, 0.15, 0)
-    for i, v in ipairs(self.todoViews) do
-        v:setBounds(pen:copy())
-        pen:move(0, 0.13, 0)
-    end
+  local pen = ui.Bounds{
+    size=self.addButton.bounds.size:copy(),
+    pose=ui.Pose(0, -height/2, self.addButton.bounds.size.depth/2)
+  }
+  pen:move(0, 0.07, 0)
+  self.addButton:setBounds(pen:copy())
+  pen:move(0, 0.15, 0)
+  for i, v in ipairs(self.todoViews) do
+    v:setBounds(pen:copy())
+    pen:move(0, 0.13, 0)
+  end
 
-    self.quitButton.bounds:moveToOrigin():move( 0.52, height/2, 0.025)
-    self.quitButton:setBounds()
+  self.quitButton.bounds:moveToOrigin():move( 0.52, height/2, 0.025)
+  self.quitButton:setBounds()
 
-    self.bounds.size.height = height
-    self:setBounds()
-
+  self.bounds.size.height = height
+  self:setBounds()
 end
 {% endhighlight %}
 
