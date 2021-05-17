@@ -46,7 +46,7 @@ In contrast to a web framework like Rails or Django, Alloverse doesn’t install
 
 To write Alloverse apps, you'll need the following:
 
-* [The Alloverse app](alloverse.com/download/).
+* [The Alloverse app](https://www.alloverse.com/download/).
 * Terminal app (preinstalled on Mac and Linux, separate install on Windows).
 * A plain text editor for code (We recommend Visual Studio Code).
 * Git (Comes with Xcode on Mac. If you just type `git` into a terminal, it'll ask to install it for you even without Xcode).
