@@ -199,14 +199,41 @@ to `place` to add a `live_media` component to your entity.
 
 - `track_id`: `CHANNEL_MEDIA` track number that corresponds to what this
   entity should play back
-- `sample_rate`: For audio: playback sample rate, as sent in `allocate_track`
-- `channel_count`: For audio: only 1 mono channel supported
-- `format`: Only "opus" audio supported
+- `type`: `audio` or `video`
+- `format`: what media format encoder/decoder to use.
+- `metadata`: a dict of type+format specific metadata about the format of the data.
+
+For audio, the only valid format is `opus`. The valid metadata fields for opus audio are:
+
+- `sample_rate`: playback sample rate
+- `channel_layout`: "mono" supported for now.
+
+For video, the only valid format is `mjpeg`. The valid metadata fields for mjpeg video are:
+
+- `width`: Width in pixels of each video frame
+- `height`: Height in pixels of each video frame
+
+Example component:
 
 ```json-doc
 "live_media": {
   "track_id": 0, // filled in by server
-  "sample_rate": 48000, //
+  "type": "audio",
+  "format": "opus"
+  "metadata": {
+    "sample_rate": 48000,
+    "channel_count": 1,
+  }
+}
+```
+
+
+Legacy format:
+
+```json-doc
+"live_media": {
+  "track_id": 0, // filled in by server
+  "sample_rate": 48000,
   "channel_count": 1,
   "format": "opus"
 }

@@ -289,14 +289,26 @@ sender's user can understand if and why poking failed.
 
 Before an entity can transmit streamed audio, video or geometry, a track must be created
 along which to send that data. This interaction will add a
-[live_media](/components#live-media)
+[live_media](/components#live_media)
 component to the sender's entity.
 
-Only audio, and only mono opus, is supported right now.
+See the [live_media](/components#live_media) compponent documentation for valid 
+media types, media formats and metadata payloads.
 
 - Receiver: `place`
 - Type: `request`
 - Request body:
+
+```json-doc
+[
+  "allocate_track",
+  "audio", # media type
+  "opus", # media format
+  { metadata ... }
+]
+```
+
+- Legacy request body:
 
 ```json-doc
 [
