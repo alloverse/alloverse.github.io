@@ -9,7 +9,6 @@ nav_order: 1
 ---
 
 # {{ page.title }}
-
 {: .no_toc }
 
 <details open markdown="block">
