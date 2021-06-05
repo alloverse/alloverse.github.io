@@ -86,18 +86,18 @@ $ ./allo/assist run alloplace://nevyn.places.alloverse.com
 
 If it all checks out, you should be able to jump into that place on your VR headset and press the button it has created.
 
-[Download the Visor app for your VR or desktop platform of choice](https://alloverse.com/download/), and then click “Connect”, “Nevyn’s place” (or click the alloplace link of the place you’ve rented or started yourself).
+[Download the Visor app](https://alloverse.com/download/) for your VR or desktop platform of choice, and then click “Connect”, “Nevyn’s place” (or click the alloplace link of the place you’ve rented or started yourself).
 
 ![On the left, the UI of our app shown as a white rectangle with an orange button. On the right, a terminal showing the assist run command that instantiates the app; and the word Hello printed thrice.](/assets/images/hello-world-1024x318.jpg "Hello world running inside Alloverse")
 Our app running in Nevyn’s place. I’ve clicked our simple app’s orange button button three times, and the laws of causality held up, printing "Hello" thrice to our terminal.
 
 At this point, you could go off, do your own thing, read the documentation as you go. Or you could keep reading, and be guided through the development of a simple but functional todo list app, which will help establish the fundamentals and make it much easier for you to build real, complex apps.
 
-This is also a good point at which to remind you: if you get stuck, or have questions or feedback, [please do hop on Discord](https://discord.gg/KhdMU6P6Uw) and give it to us straight.
+This is also a good point at which to remind you: if you get stuck, or have questions or feedback, please [hop on Discord](https://discord.gg/KhdMU6P6Uw) and give it to us straight.
 
 ## Anatomy of Hello World in the Alloverse
 
-Let’s open up `lua/main.lua` and have a look at the code, to understand what's going on. If you're not much for theory and you'd rather learn by doing, you can [skip this section and dig directly into making an app](#building-our-app).
+Let’s open up `lua/main.lua` and have a look at the code, to understand what's going on. If you're not much for theory and you'd rather learn by doing, you can skip this section and dig directly into [making an app](#building-our-app).
 
 {% highlight lua %}
 local client = Client(

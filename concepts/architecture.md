@@ -99,7 +99,7 @@ I'd love to support different visors: VR, AR desktop 3D and touch. For now,
 the focus is on the VR visor in Lovr.
 
 `alloplace://(enet endpoint)...` URLs can be opened to make a visor
-open a place ([when that's implemented](https://github.com/alloverse/allovisor/issues/1)).
+open a place.
 
 A visor should provide some sort of client identity. The idea for now is for
 each client to provide a public certificate with a name bound to it, so you
