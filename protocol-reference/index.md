@@ -14,7 +14,7 @@ Please begin by reading the [architecture documentation](/concepts/architecture)
 as it explains how all these components fit together.
 
 To see how these messages actually sent over the network, see
-[Wire Protocol](wire-protocol). This document also specifies the differences
+[Wire Protocol](/wire-protocol). This document also specifies the differences
 between the specification and the current implementation.
 
 ## Agent
@@ -239,7 +239,7 @@ These are defined by alloplace, and define how an agent and entity interact with
 
 # Official interactions
 
-Please see the [list of official interactions](interactions).
+Please see the [list of official interactions](/interactions).
 These are defined by alloplace, and define how an agent and entity interact with a place.
 
 # HTTP Endpoints

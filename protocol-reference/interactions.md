@@ -7,8 +7,6 @@ parent: Protocol Reference
 
 # {{ page.title }}
 
-For an overview of what an interaction is, please see [README.md](README.md).
-
 These interactions are defined by alloserv. Third party developers may
 create any interactions they want. They can vote to make their own
 interactions official by opening an issue on this repo.
