@@ -16,7 +16,7 @@ $nav-child-link-color: $blue-200;
 
 $body-text-color: $allo-text-color-light;
 $body-heading-color: $allo-text-color-dark;
-$code-background-color: #2b2b2b;
+//$code-background-color: #2b2b2b;
 
 @import "./code";
 
@@ -66,9 +66,9 @@ pre {
 }
 
 code {
-  color: #eee;
-  border: 0;
-  padding: 4px;
+//  color: #eee;
+//  border: 0;
+  padding: 2px 4px ;
 }
 
 .nav-list-header {
@@ -84,7 +84,8 @@ code {
 
 /* Sets the selection background color */
 *::selection {
-  background-color: $allo-light-green;
+  //background-color: $allo-light-green;
+  background-color: #ebedf5;
   color: $grey-dk-200;
 }
 
