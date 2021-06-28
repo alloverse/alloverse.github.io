@@ -337,3 +337,39 @@ media types, media formats and metadata payloads.
   "{string explaining why, presentable to user}"
 ]
 ```
+
+## Add property animation
+
+Ask to add an animation to an entity. See the documentation for animation descriptor
+in [property_animations](/components#property_animations)
+
+- Receiver: The animated entity
+- Type: `request`
+- Request body:
+
+```json-doc
+[
+  "add_property_animation",
+  { animation descriptor }
+]
+```
+
+- Success response:
+
+```json-doc
+[
+  "add_property_animation",
+  "ok",
+  "abc123" // ID of this animation
+]
+```
+
+- Failure response:
+
+```json-doc
+[
+  "add_property_animation",
+  "failed",
+  "{string explaining why, presentable to user}"
+]
+```

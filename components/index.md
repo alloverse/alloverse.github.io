@@ -305,3 +305,50 @@ Defines a custom cursor renderer, controlling the appearence of the cursor displ
 
 - `name`: The name of the custom cursor. There's currently only one defined; "brushCursor", which displays a white circle.
 - `size`: The brushCursor's radius, meant to match the size of the current brush size when interacting with a drawable surface. 1 unit = 1 centimeter. Default: "3".
+
+## `property_animations`
+
+A list of property animations to play.
+
+```json-doc
+"property_animations": {
+  "animations": {
+    "abc123": { ... }
+  }
+}
+```
+
+`animations` contains key-value pairs of animation IDs and animation descriptors. You don't
+manually create this component; instead, please use these interactions:
+
+* [add_property_animation](/protocol-reference/interactions#add-property-animation)
+* [remove_property_animation](/protocol-reference/interactions#remove-property-animation)
+
+... to modify the list of animations. Note that animations are automatically removed if
+they're non-repeating and their progress reaches 100%.
+
+Each animation descriptor has the following structure:
+
+```json-doc
+{
+  "path": "transform.matrix.rotation.y",
+  "from": 0,
+  "to": 3.14,
+  "start_at": 10004.2,
+  "duration": 0.5,
+  "easing": "quadInOut",
+  "repeats": true,
+  "autoreverses": true
+}
+```
+
+* `path`:  You describe the property to be animated by setting the path to the _key path_ of the property For example, to change the alpha field (fourth field) of the color property of the `material` component, use the path `material.color.3` (0-indexed). Required
+  *  Matrices also have some magical computed properties. You can access `rotation`, `scale` and `translation` of a matrix to directly set that attribute of the matrix. 
+  * You can also dive into the specific setting for the x, y or z axies of each of those. For example, to rotate around y, you can animate `transform.matrix.rotation.y`. In that case, the "from" and "to" values can be regular numbers.
+* `from`: The value to animate from. Can be a number, matrix (list of 16 numbers), vector (list of 3 numbers) or rotation (list of 4 numbers: angle, and the x y z of the axis). It MUST be the same kind of value as the property we're animating. Required.
+* `to`: The value to animate to. See `from`. Required.
+* `start_at`: The server time at which to start the animation. Required.
+* `duration`: Duration, in seconds. Required.
+* `easing`: Easing algorithm. Default `linear`. Allowed values: `linear`, `quadInOut`, `quadIn`, `quadOut`, .`bounceInOut`, `bounceIn`, `bounceOut`, `backInOut`, `backIn`, `backOut`, `sineInOut`, `sineIn`, `sineOut`, .`cubicInOut`, `cubicIn`, `cubicOut`, `quartInOut`, `quartIn`, `quartOut`, `quintInOut`, `quintIn`, .`quintOut`, `elasticInOut`, `elasticIn`, `elasticOut`, `circularInOut`, `circularIn`, `circularOut`, .`expInOut`, `expIn`, `expOut`.
+* `repeats`: Whether to play again from the start after animation finishes. Default `false`.
+* `autoreverses`: Whether every other repeated iteration should be in reverse. Default `false.`
