@@ -78,15 +78,15 @@ The curl’d script will have created this project structure for you:
 
 ## Trying your app out
 
-That’s it! You should now be able to start your project and see it appear in an Alloplace. If you don’t have one already, you can <!--get or rent a Place at [places.alloverse.com](places.alloverse.com/),--> boot one on your own (`docker run -e ALLOPLACE_NAME="my place" -p 21337:21337/udp -it alloverse/alloplace`), or just use our playground [alloplace://nevyn.places.alloverse.com](alloplace://nevyn.places.alloverse.com/). I'm gonna do the latter:
+That’s it! You should now be able to start your project and see it appear in an Alloplace. If you don’t have one already, you can <!--get or rent a Place at [places.alloverse.com](places.alloverse.com/),--> use our sandbox [alloplace://sandbox.places.alloverse.com](alloplace://sandbox.places.alloverse.com/), or be ambitious and boot one on your own (`docker run -e ALLOPLACE_NAME="my place" -p 21337:21337/udp -it alloverse/alloplace2`). I'm gonna do the former:
 
 {% highlight terminal %}
-$ ./allo/assist run alloplace://nevyn.places.alloverse.com
+$ ./allo/assist run alloplace://sandbox.places.alloverse.com
 {% endhighlight %}
 
 If it all checks out, you should be able to jump into that place on your VR headset and press the button it has created.
 
-[Download the Visor app](https://alloverse.com/download/) for your VR or desktop platform of choice, and then click “Connect”, “Nevyn’s place” (or click the alloplace link of the place you’ve rented or started yourself).
+[Download the Visor app](https://alloverse.com/download/) for your VR or desktop platform of choice, and then click “Connect”, “Sandbox” (or click the alloplace link of the place you’ve rented or started yourself).
 
 ![On the left, the UI of our app shown as a white rectangle with an orange button. On the right, a terminal showing the assist run command that instantiates the app; and the word Hello printed thrice.](/assets/images/hello-world-1024x318.jpg "Hello world running inside Alloverse")
 Our app running in Nevyn’s place. I’ve clicked our simple app’s orange button button three times, and the laws of causality held up, printing "Hello" thrice to our terminal.
