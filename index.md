@@ -3,7 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
-title: Get Started
+title: Get Started (Lua)
 permalink: /
 nav_order: 1
 ---
