@@ -163,9 +163,15 @@ At this point, you could go off, do your own thing, read the documentation as yo
 
 This is also a good point at which to remind you: if you get stuck, or have questions or feedback, please [hop on Discord](https://discord.gg/KhdMU6P6Uw) and give it to us straight.
 
-## You're on your own, buddy
+## Surprise ending
 
-We'd love to write a more advanced tutorial for you here, but alas,
-the number of hours in a day are finite. Come back later, or 
-[send us a PR](https://github.com/alloverse/alloverse.github.io/compare)
+This is where one would expect the tutorial to _really_ get started, 
+teaching the deeper concepts and doing something more advanced. But alas,
+the number of hours in a day are finite, and the docs are left unwritten.
+
+Maybe see it as a challenge? "Left as an exercise to the reader" and all that.
+Who knows, maybe you end up sending us a 
+[docs improvement PR](https://github.com/alloverse/alloverse.github.io/compare)?
 ;)
+
+And again, if you have any questions, [hop on Discord](https://discord.gg/KhdMU6P6Uw)!
