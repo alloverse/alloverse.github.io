@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Alloverse License
-permalink: /community/alloverse-license.html
-parent: Community
-nav_order: 4
+permalink: /license/alloverse-license.html
+parent: Licenses
+nav_order: 1
 ---
 
 # {{ page.title }}
