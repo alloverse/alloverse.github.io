@@ -9,9 +9,9 @@ nav_order: 2
 
 For an overview of what a component is, please see [Terminology](/protocol-reference).
 
-These interactions are defined by alloserv. Third party developers may
+These components are defined by placeserv. Third party developers may
 create any components they want. They can vote to make their own
-components official by opening an issue on this repo.
+components official by [pinging the dev team on Discord](https://discord.gg/4KQPX4wuW5).
 
 ## `transform`
 
@@ -203,17 +203,29 @@ to `place` to add a `live_media` component to your entity.
 - `format`: what media format encoder/decoder to use.
 - `metadata`: a dict of type+format specific metadata about the format of the data.
 
-For audio, the only valid format is `opus`. The valid metadata fields for opus audio are:
+### Audio
+
+For audio, the only valid format is `opus`. The valid `metadata` fields for opus audio are:
 
 - `sample_rate`: playback sample rate
 - `channel_layout`: "mono" supported for now.
 
-For video, the only valid format is `mjpeg`. The valid metadata fields for mjpeg video are:
+### Video
+
+For video, the two valid formats are `mjpeg` and `h264`. 
+
+* Pick `mjpeg` for video where a
+  low framerate is okay but you want to make sure everybody always has the latest frame,
+  such as for a whiteboard or drawing app.
+* Pick `h264` for high framerate video, or decorative video, such as camera,
+  screenshare or a video frame.
+
+The valid `metadata` fields for video are:
 
 - `width`: Width in pixels of each video frame
 - `height`: Height in pixels of each video frame
 
-Example component:
+### Example component:
 
 ```json-doc
 "live_media": {
