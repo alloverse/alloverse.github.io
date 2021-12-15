@@ -69,11 +69,11 @@ Version 0 implements this packet as:
 - Related interaction: [allocate_track](/protocol-reference/interactions#entity-wishes-to-transmit-live-media)
 
 ```
-<<track-id as 32bit big endian integer>><<raw media payload>>\n
+<<track-id as 32bit big endian integer>><<raw media payload>>
 ```
 
-Yeah that's right. Even audio packets have
-that stupid newline at the end.
+Note that in older versions of the protocol, even audio/media
+packets had that stupid newline at the end.
 
 ## C->S->C Clock sync packet
 
