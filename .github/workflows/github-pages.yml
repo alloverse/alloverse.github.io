@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v2
-      - run: git submodule update --init --remote
+      - run: GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --remote
       - run: sudo apt-get install -y luarocks
       - run: sudo luarocks install ldoc
       - run: ldoc -l _generation -x .md -f markdown _generation/libs
