@@ -226,6 +226,26 @@ sender's user can understand if and why poking failed.
 ]
 ```
 
+### Entity grabs
+
+Another action an entity can do when pointing at another entity, is to
+"grab" it. The below interaction is sent from the visor to the grabbed
+entity, but the actual moving of the grabbed thing is performed with
+a field in the intent struct, and the movement is performed server-side.
+The purpose of this event is just to let the entity know that it will
+be moved by the server between the start and stop event, and the
+receiving app doesn't have to/can't do any movement on its own in response.
+
+- Receiver: The pointed-at entity
+- Type: `one-way`
+- Request body:
+
+```json-doc
+[
+  "grabbing",
+  {true|false} // whether grabbing started (true) or stopped (false)
+]
+```
 
 ### Add property animation
 
