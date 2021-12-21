@@ -13,6 +13,9 @@ These components are defined by placeserv. Third party developers may
 create any components they want. They can vote to make their own
 components official by [pinging the dev team on Discord](https://discord.gg/4KQPX4wuW5).
 
+1. TOC
+{:toc}
+
 ## `transform`
 
 Defines the physical location and orientation of the entity relative to its parent

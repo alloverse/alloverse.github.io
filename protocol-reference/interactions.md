@@ -11,7 +11,11 @@ These interactions are defined by alloserv. Third party developers may
 create any interactions they want. They can vote to make their own
 interactions official by opening an issue on this repo.
 
-## Agent announce
+1. TOC
+{:toc}
+
+## Authentication and identity
+### Agent announce
 
 After an agent connects, before it can interact with the place
 it must announce itself and spawn its avatar entity. Failure to
@@ -47,7 +51,12 @@ announce will lead to force disconnect.
 ]
 ```
 
-## Spawn entity
+### Modify ACL
+
+TBD
+
+## Modifying the world
+### Spawn entity
 
 - Receiver: `place`
 - Type: `request`
@@ -81,7 +90,7 @@ announce will lead to force disconnect.
 ]
 ```
 
-## Remove entity
+### Remove entity
 
 - Receiver: `place`
 - Type: `request`
@@ -107,7 +116,7 @@ announce will lead to force disconnect.
 ]
 ```
 
-## Change/add/remove component(s) in entity
+### Change/add/remove component(s) in entity
 
 - Receiver: `place`
 - Type: `request`
@@ -141,7 +150,178 @@ Response:
 A default ACL rule is set so that you must own the entity
 whose component you're changing, but this rule can be changed.
 
-## Subscribe/unsubscribe
+
+## User interface interactions
+
+### Entity points at another entity
+
+An entity, most likely the avatar of a user, is pointing with their
+finger at another entity. This is used as a precursor to actually
+interacting with it ("poking it").
+
+The interaction describes two points in world space: the tip of
+the finger, and the intersection point between the ray from the
+finger and the nearest entity, so that the entity can know _where_
+on itself someone is pointing.
+
+- Receiver: The pointed-at entity
+- Type: `one-way`
+- Body:
+
+```json-doc
+[
+  "point",
+  [1.0, 2.0, 3.0], // finger tip in world space coordinates
+  [4.0, 5.0, 6.0], // intersection point in world space coordinates
+]
+```
+
+If the ray cast from the user's finger veers off the last pointed-at
+entity, one last message is sent to indicate that the user has stopped
+pointing at it. This is useful for removing highlight effect, etc.
+
+```json-doc
+[
+  "point-exit"
+]
+```
+
+### Entity pokes
+
+Once an entity is pointing at another entity, it can ask to "physically"
+interact with it, by turning the pointing into a poke. The poke doesn't
+contain vector information -- it's up to the receiver to correlate with
+pointing events, as those will be streaming a continuously updating
+location, while poking is a request-response which the receiver
+can reject. Such a rejection should be visualized, so that the
+sender's user can understand if and why poking failed.
+
+- Receiver: The pointed-at entity
+- Type: `request`
+- Request body:
+
+```json-doc
+[
+  "poke",
+  {true|false} // whether poking started (true) or stopped (false)
+]
+```
+
+- Success response:
+
+```json-doc
+[
+  "poke",
+  "ok"
+]
+```
+
+- Failure response:
+
+```json-doc
+[
+  "poke",
+  "failed",
+  "{string explaining why, presentable to user}"
+]
+```
+
+
+### Add property animation
+
+Ask to add an animation to an entity. See the documentation for animation descriptor
+in [property_animations](/components#property_animations)
+
+- Receiver: The animated entity
+- Type: `request`
+- Request body:
+
+```json-doc
+[
+  "add_property_animation",
+  { animation descriptor }
+]
+```
+
+- Success response:
+
+```json-doc
+[
+  "add_property_animation",
+  "ok",
+  "abc123" // ID of this animation
+]
+```
+
+- Failure response:
+
+```json-doc
+[
+  "add_property_animation",
+  "failed",
+  "{string explaining why, presentable to user}"
+]
+```
+
+
+## Protocol level messages
+
+### Entity wishes to transmit live media
+
+Before an entity can transmit streamed audio, video or geometry, a track must be created
+along which to send that data. This interaction will add a
+[live_media](/components#live_media)
+component to the sender's entity.
+
+See the [live_media](/components#live_media) compponent documentation for valid 
+media types, media formats and metadata payloads.
+
+- Receiver: `place`
+- Type: `request`
+- Request body:
+
+```json-doc
+[
+  "allocate_track",
+  "audio", # media type
+  "opus", # media format
+  { metadata ... }
+]
+```
+
+- Legacy request body:
+
+```json-doc
+[
+  "allocate_track",
+  "audio", # media type
+  48000, # sample rate
+  1, # channel count
+  "opus" # media format
+]
+```
+
+- Success response:
+
+```json-doc
+[
+  "allocate_track",
+  "ok",
+  3 # track_id
+]
+```
+
+- Failure response:
+
+```json-doc
+[
+  "allocate_track",
+  "failed",
+  "{string explaining why, presentable to user}"
+]
+```
+
+### TBD: Subscribe/unsubscribe
 
 - Receiver: `place`
 - Type: `request`
@@ -207,169 +387,3 @@ word "new_tweet" followed by two fields. The guard clause asks that
 the sender must be "nevyn". If the guard matches, the publication
 interaction will be forwarded by the place from the sending agent
 to the subscribing agent.
-
-## Modify ACL
-
-## Entity points at another entity
-
-An entity, most likely the avatar of a user, is pointing with their
-finger at another entity. This is used as a precursor to actually
-interacting with it ("poking it").
-
-The interaction describes two points in world space: the tip of
-the finger, and the intersection point between the ray from the
-finger and the nearest entity, so that the entity can know _where_
-on itself someone is pointing.
-
-- Receiver: The pointed-at entity
-- Type: `one-way`
-- Body:
-
-```json-doc
-[
-  "point",
-  [1.0, 2.0, 3.0], // finger tip in world space coordinates
-  [4.0, 5.0, 6.0], // intersection point in world space coordinates
-]
-```
-
-If the ray cast from the user's finger veers off the last pointed-at
-entity, one last message is sent to indicate that the user has stopped
-pointing at it. This is useful for removing highlight effect, etc.
-
-```json-doc
-[
-  "point-exit"
-]
-```
-
-## Entity pokes
-
-Once an entity is pointing at another entity, it can ask to "physically"
-interact with it, by turning the pointing into a poke. The poke doesn't
-contain vector information -- it's up to the receiver to correlate with
-pointing events, as those will be streaming a continuously updating
-location, while poking is a request-response which the receiver
-can reject. Such a rejection should be visualized, so that the
-sender's user can understand if and why poking failed.
-
-- Receiver: The pointed-at entity
-- Type: `request`
-- Request body:
-
-```json-doc
-[
-  "poke",
-  {true|false} // whether poking started (true) or stopped (false)
-]
-```
-
-- Success response:
-
-```json-doc
-[
-  "poke",
-  "ok"
-]
-```
-
-- Failure response:
-
-```json-doc
-[
-  "poke",
-  "failed",
-  "{string explaining why, presentable to user}"
-]
-```
-
-## Entity wishes to transmit live media
-
-Before an entity can transmit streamed audio, video or geometry, a track must be created
-along which to send that data. This interaction will add a
-[live_media](/components#live_media)
-component to the sender's entity.
-
-See the [live_media](/components#live_media) compponent documentation for valid 
-media types, media formats and metadata payloads.
-
-- Receiver: `place`
-- Type: `request`
-- Request body:
-
-```json-doc
-[
-  "allocate_track",
-  "audio", # media type
-  "opus", # media format
-  { metadata ... }
-]
-```
-
-- Legacy request body:
-
-```json-doc
-[
-  "allocate_track",
-  "audio", # media type
-  48000, # sample rate
-  1, # channel count
-  "opus" # media format
-]
-```
-
-- Success response:
-
-```json-doc
-[
-  "allocate_track",
-  "ok",
-  3 # track_id
-]
-```
-
-- Failure response:
-
-```json-doc
-[
-  "allocate_track",
-  "failed",
-  "{string explaining why, presentable to user}"
-]
-```
-
-## Add property animation
-
-Ask to add an animation to an entity. See the documentation for animation descriptor
-in [property_animations](/components#property_animations)
-
-- Receiver: The animated entity
-- Type: `request`
-- Request body:
-
-```json-doc
-[
-  "add_property_animation",
-  { animation descriptor }
-]
-```
-
-- Success response:
-
-```json-doc
-[
-  "add_property_animation",
-  "ok",
-  "abc123" // ID of this animation
-]
-```
-
-- Failure response:
-
-```json-doc
-[
-  "add_property_animation",
-  "failed",
-  "{string explaining why, presentable to user}"
-]
-```
