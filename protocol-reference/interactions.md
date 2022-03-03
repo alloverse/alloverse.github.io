@@ -283,6 +283,37 @@ in [property_animations](/components#property_animations)
 ]
 ```
 
+### Remove property animation
+
+Ask to remove an existing animation by ID.
+
+```json-doc
+[
+  "remove_property_animation",
+  "abc123"
+]
+```
+
+- Success response:
+
+```json-doc
+[
+  "remove_property_animation",
+  "ok",
+  "abc123" // ID of this animation that was removed
+]
+```
+
+- Failure response:
+
+```json-doc
+[
+  "remove_property_animation",
+  "failed",
+  "{string explaining why, presentable to user}"
+]
+```
+
 
 ## Protocol level messages
 
