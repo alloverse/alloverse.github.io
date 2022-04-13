@@ -29,7 +29,7 @@ github_username: alloverse
 markdown: kramdown
 
 # Set a path/url to a logo that will be displayed instead of the title
-logo: "/assets/images/Alloverse01.png"
+logo: "https://alloverse.com/wp-content/uploads/Alloverse-logo-moniker-256x38-1.svg"
 
 # Heading anchor links appear on hover over h1-h6 tags in page content
 # allowing users to deep link to a particular heading on a page.

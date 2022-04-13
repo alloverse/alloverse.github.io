@@ -1,29 +1,14 @@
 /* Just-the-docs overrides and custom styles */
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&family=Sen:wght@400;700");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&family=Sen:wght@400;700;800");
 
-// Variables
-$allo-light-yellow: #fff7e9;
-$allo-light-green: #cbebe1;
 
-$allo-text-color-light: #4a4a4a;
-$allo-text-color-dark: #3a3a3a;
-
-$sidebar-color: $allo-light-yellow;
-
-$link-color: $blue-200;
-$nav-child-link-color: $blue-200;
-
-$body-text-color: $allo-text-color-light;
-$body-heading-color: $allo-text-color-dark;
-//$code-background-color: #2b2b2b;
 
 @import "./code";
+@import "../color_schemes/alloverse.scss";
 
 body {
-  font-family: "Open Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-    sans-serif;
-
+  font-family: "Open Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   color: $allo-text-color-dark;
 }
 
@@ -33,29 +18,36 @@ h3,
 h4,
 .text-delta {
   font-family: "Sen", "Segoe UI", sans-serif;
+  color: $allo-text-color-dark;
   font-weight: 700;
-  letter-spacing: -0.4px;
-  color: $allo-text-color-light;
-  font-display: optional;
+  letter-spacing: -0.5px;
 }
 
 .main-content {
   h1 {
-    font-size: 32px;
+    font-size: 36px!important;;
+    font-weight: 800;
+    letter-spacing: -1px;
     margin-bottom: 24px;
   }
   h2 {
-    font-size: 24px;
+    font-size: 30px!important;
+    color: $allo-text-color-dark-90;
+    letter-spacing: -0.8px;
+    
     margin-top: 48px;
     margin-bottom: 6px;
   }
   h3 {
-    font-size: 18px;
-    margin-top: 36px;
+    font-size: 24px!important;
+    
+    margin-top: 32px;
     margin-bottom: 6px;
   }
   h4 {
-    font-size: 16px;
+    font-size: 18px!important;
+    text-transform: none;
+
     margin-top: 30px;
     margin-bottom: 6px;
   }
@@ -66,9 +58,7 @@ pre {
 }
 
 code {
-//  color: #eee;
-//  border: 0;
-  padding: 2px 4px ;
+  padding: 2px 4px;
 }
 
 .nav-list-header {
@@ -82,26 +72,27 @@ code {
   }
 }
 
-/* Sets the selection background color */
-*::selection {
-  //background-color: $allo-light-green;
-  background-color: #ebedf5;
-  color: $grey-dk-200;
-}
-
 // Tables for arguments & returns
 .table-wrapper {
-  thead {
-    text-align: left;
+  table {
+    border-collapse: collapse;
 
-    th {
-      background: #f6f6f6;
+    thead {
+      text-align: left;
+      th {
+        background: $allo-dark-gray-30;
+      }
     }
+  
+    td {
+      border-bottom-color: $border-color;
+    }
+
   }
 }
 
 .returns-nothing {
-  color: #aaaaaa;
+  color: $allo-dark-gray;
   font-style: italic;
 }
 

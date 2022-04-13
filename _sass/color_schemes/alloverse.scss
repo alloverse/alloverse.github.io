@@ -5,24 +5,27 @@
   https://github.com/pmarsceill/just-the-docs/blob/master/_sass/support/_variables.scss 
 */
 
-$allo-light-yellow: #fff7e9;
-$allo-darker-yellow: darken($allo-light-yellow, 10%);
 
-$allo-light-green: #cbebe1;
-$allo-text-color-light: #4a4a4a;
-$allo-text-color-dark: #3a3a3a;
+// Variables
 
-//$body-background-color: $allo-light-yellow;
-$sidebar-color: $allo-light-yellow;
+$allo-light-blue: #EAF6FF;
+$allo-dark-blue: #CDEBFA;
+$allo-light-gray-30: #EFF1F6;
+$allo-dark-gray: #A9B6D1;
+$allo-dark-gray-30: #E5E9F1;
 
-$link-color: $blue-200;
-$nav-child-link-color: $blue-200;
-
-$sidebar-color: $allo-light-yellow;
+$allo-text-color-dark: #0c2b48;
+$allo-text-color-dark-90: #24405A;
 
 $link-color: $blue-200;
 $nav-child-link-color: $blue-200;
 
-$body-text-color: $allo-text-color-light;
+$body-text-color: $allo-text-color-dark;
 $body-heading-color: $allo-text-color-dark;
-//$code-background-color: #2B2B2B;
+
+$border-color: rgba(12, 43, 72, 0.1); // 10% of text-color-dark
+
+$sidebar-color: $allo-light-blue;
+
+// Hover background color for clickable items in the sidebar
+$feedback-color: $allo-dark-blue;
