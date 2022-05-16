@@ -367,3 +367,19 @@ Each animation descriptor has the following structure:
 * `easing`: Easing algorithm. Default `linear`. Allowed values: `linear`, `quadInOut`, `quadIn`, `quadOut`, .`bounceInOut`, `bounceIn`, `bounceOut`, `backInOut`, `backIn`, `backOut`, `sineInOut`, `sineIn`, `sineOut`, .`cubicInOut`, `cubicIn`, `cubicOut`, `quartInOut`, `quartIn`, `quartOut`, `quintInOut`, `quintIn`, .`quintOut`, `elasticInOut`, `elasticIn`, `elasticOut`, `circularInOut`, `circularIn`, `circularOut`, .`expInOut`, `expIn`, `expOut`.
 * `repeats`: Whether to play again from the start after animation finishes. Default `false`.
 * `autoreverses`: Whether every other repeated iteration should be in reverse. Default `false.`
+
+## `service_discovery`
+
+Indicates that the entity provides some sort of service as an interaction API.
+
+```json-doc
+{
+  "name": "servicename",
+  "description": "Short developer-readable description of the service",
+  "docs": "https://url/to/documentation"
+}
+```
+
+For example, to find a service that lets you view image files, you might look for
+a service name `imageviewer`, and look into its documentation on how to
+ask it to display a specific file.
