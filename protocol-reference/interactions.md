@@ -150,6 +150,48 @@ Response:
 A default ACL rule is set so that you must own the entity
 whose component you're changing, but this rule can be changed.
 
+### Launch app
+
+- Receiver: `place`
+- Type: `request`
+- Request body:
+
+```json-doc
+[
+  "launch_app",
+  "{app URL}",
+  { launch parameters as arbitrary JSON object }
+]
+```
+
+Response:
+
+```json-doc
+[
+  "launch_app",
+  "ok",
+  "{avatar id}"
+]
+```
+
+or
+
+
+```json-doc
+[
+  "launch_app",
+  "error",
+  "{human-readable error string"
+]
+```
+
+Ask the Place to launch an app on behalf of the sending entity. The
+Place will establish a connection to the requested app if possible,
+launch it to that Place with the given arguments and the identity of the
+calling client, and then return the avatar ID if all that succeeded.
+
+(The avatar of an app is the "main UI" entity of the app.)
+
 
 ## User interface interactions
 
