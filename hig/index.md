@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 3D Human Interface Guidelines
+title: 3D Interface Guidelines
 permalink: /hig
 nav_order: 9
 ---

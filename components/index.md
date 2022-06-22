@@ -2,10 +2,11 @@
 layout: default
 title: Components
 permalink: /components
-nav_order: 2
+nav_order: 3
 ---
 
 # {{ page.title }}
+{: .no_toc }
 
 For an overview of what a component is, please see [Terminology](/protocol-reference).
 
@@ -13,10 +14,16 @@ These components are defined by placeserv. Third party developers may
 create any components they want. They can vote to make their own
 components official by [pinging the dev team on Discord](https://discord.gg/4KQPX4wuW5).
 
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
 1. TOC
 {:toc}
+</details>
 
-## `transform`
+## transform
 
 Defines the physical location and orientation of the entity relative to its parent
 entity if it has one; otherwise relative to the world origo.
@@ -32,7 +39,7 @@ things are positioned and oriented in Alloverse.
 _note: In an early version of the protocol, transform was represented as a 3-element position vector
 and 3-element rotation vector with euler angle rotations._
 
-## `geometry`
+## geometry
 
 Defines the visual geometry of an entity. This should use assets in the future,
 but until we have assets, geometry is encoded in-line in entity description.
@@ -78,7 +85,7 @@ This is only recommended for debugging, and until we have geometry assets.
 
 `geometry` used to also contain `texture`, but that's been moved to `material.texture`.
 
-## `material`
+## material
 
 Defines the surface appearance of the component being rendered.
 
@@ -94,7 +101,7 @@ Defines the surface appearance of the component being rendered.
 - `shader_name`: Optional ame of hard-coded shader to use for this object. Currently allows `plain` and `pbr`. Default is `plain`.
 - `texture`: optional texture asset. Default is none.
 
-## `text`
+## text
 
 Defines a text renderer for this entity, drawing a text texture at `transform`.
 
@@ -111,7 +118,7 @@ Defines a text renderer for this entity, drawing a text texture at `transform`.
 - `wrap`: The width in meters at which to wrap the text, if at all.
 - `halign`: Horizontal alignment; "center", "left" or "right".
 
-## `collider`
+## collider
 
 Defines the physical shape of an entity.
 
@@ -124,7 +131,7 @@ Defines the physical shape of an entity.
 }
 ```
 
-## `relationships`
+## relationships
 
 Specify the relationships between entities, in particular child entites' "parent" entity. If an entity has a parent, its transform should be concatenated with all its ancestors' transforms before being displayed.
 
@@ -134,7 +141,7 @@ Specify the relationships between entities, in particular child entites' "parent
 }
 ```
 
-## `intent`
+## intent
 
 Specify how the entity's owning agent's intent affects this entity.
 
@@ -148,7 +155,7 @@ Specify how the entity's owning agent's intent affects this entity.
 }
 ```
 
-## `grabbable`
+## grabbable
 
 Describes how an entity maybe grabbed/held, and then
 moved/dragged by a user.
@@ -188,7 +195,7 @@ See the field `grab` under [intent](protocol-reference/intent).
   set this to the identity matrix to make an object move immediately into the user's hand
   when grabbed.
 
-## `live_media`
+## live_media
 
 The entity that holds a `live_media` component for a specific track
 is the entity that "plays" that track; e g for audio, audio will be played
@@ -254,7 +261,7 @@ Legacy format:
 }
 ```
 
-## `sound_effect`
+## sound_effect
 
 Play a sound emanating from this entity, based on a sound asset.
 
@@ -294,7 +301,7 @@ time it's played.
 ```
 
 
-## `clock`
+## clock
 
 Only set on the entity `place`, this component defines the flow of time
 for a place.
@@ -307,7 +314,7 @@ for a place.
 
 Its reference time is undefined. It is always seconds as a double.
 
-## `cursor`
+## cursor
 
 Defines a custom cursor renderer, controlling the appearence of the cursor displayed when pointing at the entity.
 
@@ -321,7 +328,7 @@ Defines a custom cursor renderer, controlling the appearence of the cursor displ
 - `name`: The name of the custom cursor. There's currently only one defined; "brushCursor", which displays a white circle.
 - `size`: The brushCursor's radius, meant to match the size of the current brush size when interacting with a drawable surface. 1 unit = 1 centimeter. Default: "3".
 
-## `property_animations`
+## property_animations
 
 A list of property animations to play.
 

@@ -22,18 +22,18 @@ nav_order: 1
 
 ## What is Alloverse?
 
-Alloverse is an open platform for collaborative workspaces in 3D. It’s Gibson style Cyberspace, but for your day-to-day work and play, with your friends and colleagues. It’s a VR and AR platform for creating spaces, and for running real applications within those spaces, together with other people. In nerd terms, it's a VR/AR/3D "window manager" and collaborative workspace.
+Alloverse is an open platform for collaborative workspaces in 3D. It’s Gibson-style Cyberspace - but for day-to-day work and play with friends and colleagues. It’s a VR and AR platform for creating spaces, and for running real applications within those spaces, together with other people. In nerd terms, it's a VR/AR/3D "window manager" and collaborative workspace.
 
-For more information, please see the [Alloverse website](https://www.alloverse.com).
+For more information, please see the [Alloverse website](https://www.alloverse.com){:target="_blank"}.
 
-Your "place" is where you decorate, run apps, invite people, and hang out. It's like a collaborative X11 server: It runs a world simulation server, a voip gateway, and all the backing data for 3d UIs for the running apps. The reference Elixir implementation is in alloplace.
+Your "Place" is where you decorate, run apps, invite people, and hang out. It's like a collaborative X11 server: It runs a world simulation server, a voip gateway, and all the backing data for 3d UIs for the running apps. The reference Elixir implementation is in alloplace.
 A "visor" is the GUI application you use to visit places and interact with your apps. allovisor implements such a visor for VR in Unity.
-An "appliance" is a process running on your computer, or on a computer on the Internet. Like opening a web page (or launching a remote X11 process), this app can then show its interface and be interacted with inside your place.
+An "app" is a process running on your computer, or on a computer on the Internet. Like opening a web page (or launching a remote X11 process), this app can then show its interface and be interacted with inside your place.
 The network and "UI protocol" is abstracted into the allonet library, written in C and used by all the above projects.
 
 ## Developing an Alloverse App
 
-An Alloverse app is a server-side app that you run on your own server, similarly to how you would host a web app on your own server. The difference is, when a user goes to your app on the web, it loads into that user’s web browser on their computer; but when a user goes to your alloapp in an Alloverse Place, the app loads into the Place for all users in that Place to use, and your code gets collaboration and VR super-powers for free.
+An Alloverse app is a server-side app that you run on your own server, similar to how you would host a web app on your own server. The difference is, when a user goes to your app on the web, it loads into that user’s web browser on their computer; but when a user goes to your alloapp in an Alloverse Place, the app loads into the Place for all users in that Place to use, and your code gets collaboration and VR super-powers for free.
 
 This tutorial will take you through creating an Alloverse app using the Lua programming language, since that is the language we’ve developed the most support for so far.
 
@@ -43,29 +43,34 @@ In contrast to a web framework like Rails or Django, Alloverse doesn’t install
 
 ## Prerequisites
 
-To write Alloverse apps, you'll need the following:
+To write your own Alloverse app, you'll need the following:
 
-* [The Alloverse app](https://www.alloverse.com/download/).
-* Terminal app (preinstalled on Mac and Linux, separate install on Windows).
-* A plain text editor for code (We recommend Visual Studio Code).
+* The [Alloverse Visor](https://www.alloverse.com/download/){:target="_blank"} is the official application that serves as the window through which you can view and interact with the Alloverse. At a later stage you should try installing it on a VR headset, but for the purposes of this guide we recommend and assume you'll be using the desktop version.
+* A terminal app (preinstalled on Mac and Linux, separate install on Windows).
+* A plain text editor for code (We recommend [Visual Studio Code](https://code.visualstudio.com/download){:target="_blank"}).
 * Git (Comes with Xcode on Mac. If you just type `git` into a terminal, it'll ask to install it for you even without Xcode).
-* Only on Windows: Cygwin or MingW (this be a bit of a setup; we recommend doing this on a Mac or Linux).
+* Only on Windows: Cygwin or MingW (this is a bit of a setup; we recommend doing this on a Mac or Linux).
+
+## Running the Alloverse Visor
+
+Let's begin by opening the window to Alloverse by getting the Visor running and connected to a Place. Open the app you just downloaded, press the “Connect” button and enter “Sandbox” in the input field. Alternatively, if you're on a Mac, clicking [this link](alloplace://sandbox.places.alloverse.com/) will automatically do the above for you.
+
+That's it - you're now inside the Alloverse Sandbox Place, providing you a way to view and interact with the app you'll be developing in the next step.
 
 ## Creating your project
 
-First, create a project folder. Allo Assist requires Git to fetch all its dependencies, so we’ll init a Git repo in the folder. Then we can initialize the alloapp environment into it, and make sure it works:
+Now, let's create a project folder. Allo Assist requires Git to fetch all its dependencies, so we’ll init a Git repo in the folder. Then we can initialize the alloapp environment into it:
 
 {% highlight terminal %}
 $ mkdir allo-todo
 $ cd allo-todo
 $ git init
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/alloverse/alloapp-assist/master/setup.bash)"
-$ ./allo/assist help
 {% endhighlight %}
 
-(This is also a good time to `git commit -a`, so the next commit only contains your own changes.)
+If all went well so far, you should now be able to run `./allo/assist help` to review all available commands. This might also be a good time to run `git commit -a`, so the next commit only contains your own changes.
 
-The curl’d script will have created this project structure for you:
+Anyway, the curl’d script will have created this project structure for you:
 
 - `lua` contains the Lua source code for your app
   - `lua/main.lua` contains your app! It barely does anything yet. But you can add more code to this file to keep going, and add more files into lua to modularize your code.
@@ -78,26 +83,26 @@ The curl’d script will have created this project structure for you:
 
 ## Trying your app out
 
-That’s it! You should now be able to start your project and see it appear in an Alloplace. If you don’t have one already, you can <!--get or rent a Place at [places.alloverse.com](places.alloverse.com/),--> use our sandbox [alloplace://sandbox.places.alloverse.com](alloplace://sandbox.places.alloverse.com/), or be ambitious and boot one on your own (`docker run -e ALLOPLACE_NAME="my place" -p 21337:21337/udp -it alloverse/alloplace2`). I'm gonna do the former:
+You should now be able to make your app appear in an Alloplace! In the terminal, run the following command:
 
 {% highlight terminal %}
 $ ./allo/assist run alloplace://sandbox.places.alloverse.com
 {% endhighlight %}
 
-If it all checks out, you should be able to jump into that place on your VR headset and press the button it has created.
-
-[Download the Visor app](https://alloverse.com/download/) for your VR or desktop platform of choice, and then click “Connect”, “Sandbox” (or click the alloplace link of the place you’ve rented or started yourself).
+If everything checks out, go to the Alloverse Visor, where you should be able to see and interact with the app and its button. (If you've moved around in the place, you may need to look around to see it)
 
 ![On the left, the UI of our app shown as a white rectangle with an orange button. On the right, a terminal showing the assist run command that instantiates the app; and the word Hello printed thrice.](/assets/images/hello-world-1024x318.jpg "Hello world running inside Alloverse")
-Our app running in Nevyn’s place. I’ve clicked our simple app’s orange button button three times, and the laws of causality held up, printing "Hello" thrice to our terminal.
+*Our app running in Nevyn’s place. I’ve clicked our simple app’s orange button button three times, and the laws of causality held up, printing "Hello" thrice to our terminal.*
 
 At this point, you could go off, do your own thing, read the documentation as you go. Or you could keep reading, and be guided through the development of a simple but functional todo list app, which will help establish the fundamentals and make it much easier for you to build real, complex apps.
 
-This is also a good point at which to remind you: if you get stuck, or have questions or feedback, please [hop on Discord](https://discord.gg/KhdMU6P6Uw) and give it to us straight.
+If your app ever disappears, take a look around in the Alloverse to make sure you're not just looking in the wrong direction. If you still can't see it, it might have crashed. Check out the terminal from which you ran it - there should be error messages to help you figure out what went wrong.
+
+This is also a good point at which to remind you: if you get stuck, or have questions or feedback, please [hop on Discord](https://discord.gg/KhdMU6P6Uw){:target="_blank"} and give it to us straight.
 
 ## Anatomy of Hello World in the Alloverse
 
-Let’s open up `lua/main.lua` and have a look at the code, to understand what's going on. If you're not much for theory and you'd rather learn by doing, you can skip this section and dig directly into [making an app](#building-our-app).
+Let’s open up `lua/main.lua` and have a look at the code, to understand what's going on. If you're not much for theory, you may skip this section and get straight to [making an app](#building-our-app).
 
 {% highlight lua %}
 local client = Client(
@@ -117,7 +122,7 @@ app.assetManager:add(assets)
 {% endhighlight %}
 
 Assets are files (images, glb models, videos, sounds, etc...) that you want to use
-in your app. They need to be published so that user's headsets can download them
+in your app. They need to be published so that users' visors can download them
 before you can use them. We make `assets` global so you can use it throughout your app.
 
 {% highlight lua %}
@@ -131,8 +136,8 @@ Your application is represented by a hierarchy of views. If you're a web develop
 
 `Bounds` is the position and size of your object:
 
-- The first three numbers are the x, y and z position ([see coordinate space reference](/protocol-reference/coordinate-system)), and in this case they mean this view is centered horizontally; its base is 1.2 meters up from the floor; and -2 means 2 meters into the Place, depth-wise.
-- The second group of three numbers is the width, depth and height. Here, we're 1 meter wide, half a meter wide, and one centimeter deep.
+- The first three numbers defines the x, y and z positions (see: [coordinate space reference](/protocol-reference/coordinate-system){:target="_blank"}). In this case, `0, 1.2, -2` means the `mainView` is centered horizontally 1.2 meters up from the floor and 2 meters into the Place, depth-wise.
+- The second triplet of numbers refers to the object's width, depth and height. In this case, `1, 0.5, 0.01` defines the object as being 1 meter wide, half a meter tall, and one centimeter deep.
 
 We also make the main view `grabbable`, so the user can move it around the Place. Alternatively, you can add a GrabHandle, which acts like the title bar of a desktop UI's window.
 
@@ -144,9 +149,9 @@ button.onActivated = function()
 end
 {% endhighlight %}
 
-The standard template has created a standard Button component for you, at 2 decimeters wide and high. Its position of 5 centimeter down and forward is relative to the `mainView`'s position.
+The standard template has created a standard Button component for you, at 2 decimeters wide and tall. Its position of 5 centimeter down and forward is relative to its parent - in this case the `mainView`.
 
-The `onActivated` callback lets us run code when the button is pressed. This'll print "hello" to your local terminal when you run the app on your machine (even if you're running the visor somewhere else on the Internet!)
+The `onActivated` callback lets us run code when the button is pressed. This'll print "hello" to your local terminal when you run the app on your machine (even if you're running the visor somewhere else on the Internet)!
 
 {% highlight lua %}
 app.mainView = mainView
@@ -154,11 +159,11 @@ app:connect()
 app:run()
 {% endhighlight %}
 
-Finally, the template has configured the app's main view to use this dummy UI. Then, it connects to the Place we've been asked to run in, and then hand over the runtime of the app to the UI framework so it keeps running until the user quits it.
+Finally, the template has configured the app's `mainView` to use this dummy UI. Then, it connects to the Place we've been asked to run in, and finally hands over the runtime of the app to the UI framework so it keeps running until the user quits it.
 
 Now that we got the gist of how to compose an app like this, we can replace it with something useful.
 
-## Building our app
+## Building your app
 
 Let's make a todo list app! I'm a master artist, so I've painted this piece of art to represent our goal:
 
@@ -208,11 +213,11 @@ function TodosView:_init(bounds)
 end
 {% endhighlight %}
 
-We're using [Penlight's `class` macro](https://stevedonovan.github.io/Penlight/api/libraries/pl.class.html) to create classes. We inherit [ui.Surface](/doc/classes/Surface.html), which is like a [ui.View](/doc/classes/View.html) except it also draws a background, so our app gets a backdrop to rest our controls onto.
+We're using [Penlight's `class` macro](https://stevedonovan.github.io/Penlight/api/libraries/pl.class.html){:target="_blank"} to create classes. We inherit [ui.Surface](/doc/classes/Surface.html){:target="_blank"}, which is like a [ui.View](/doc/classes/View.html){:target="_blank"} except it also draws a background, so our app gets a backdrop to rest our controls onto.
 
-We create a constructor, where we set up initial state and controls. Here we want a quit [Button](/doc/classes/Button.html), and an add [Button](/doc/classes/Button.html). We immediately add them as subviews to the TodosView, so they show up in the view hierarchy. For the first button, we use one of our image assets as a texture, and for the other, we set the text on the label instead.
+We create a constructor, where we set up initial state and controls. Here we want a quit [Button](/doc/classes/Button.html){:target="_blank"}, and an add [Button](/doc/classes/Button.html){:target="_blank"}. We immediately add them as subviews to the TodosView, so they show up in the view hierarchy. For the first button, we use one of our image assets as a texture, and for the other, we set the text on the label instead.
 
-AlloUI doesn't have a comprehensive layout system instead, so we'll call our own `layout` at opportune moments. Let's stub it out so we have something to start with. We'll also create an instance of it, and use it as our app's main view:
+AlloUI doesn't have a comprehensive layout system instead, so we'll call our own `layout` at opportune moments. Let's stub it out so we have something to start with. We'll also create an instance of it, and use it as our app's main view. Paste the following into your code, just below the `_init` function:
 
 {% highlight lua %}
 
@@ -225,13 +230,11 @@ app.mainView = TodosView(ui.Bounds(0, 1.2, -2, 1, 0.5, 0.01))
 
 {% endhighlight %}
 
-Fire off a quick `./allo/assist run` in your terminal, and you'll be presented with this beauty in VR:
+Fire off a quick `./allo/assist run alloplace://sandbox.places.alloverse.com` in your terminal, and you'll be presented with this beauty in Alloverse:
 
 ![A white surface with a close button in the top right, and an 'add todo' button along the bottom](/assets/images/todo-progress-1.png)
 
-We've created a VR interface, how cool is that!
-
-Next up, let's create that popup used for inputting new items.
+We've created a VR interface, how cool is that!? Just keep in mind that even thought the "Add todo" button is there, it isn't clickable yet. So, let's attach some functionality to it: let's make it create that popup for inputting new todo items.
 
 {% highlight lua %}
 
@@ -272,7 +275,7 @@ end
 Phew, that's a handful. Let's step through it.
 
 - `popup` is our new popup window. It's another surface, one meter by a half.
-- To it, we add a [TextField](/doc/classes/TextField.html)! This is your standard issue text input view. Tapping it will focus it, which will display a virtual keyboard to the user (or if you have a hardware keyboard, you can just use that).
+- To it, we add a [TextField](/doc/classes/TextField.html){:target="_blank"}! This is your standard issue text input view. Tapping it will give it focus, allowing you to type something in it with your keyboard. (If you would do this while using the Alloverse headset app, it will display a virtual keyboard for you to use.
 - We want to close the popup both when the return key is pressed, and when you manually tap the "Add" button, so let's create a callback we can use for both called `done`.
 - `onReturn` is used to react to return/enter key, and we can also use it to make sure a newline character isn't added to the text.
 - `showNewTodoPopup` has been called with a `hand`. That's the hand of the user that tapped the "Add todo button". It belongs to an avatar, so we can actually ask the avatar if it would pretty please focus this text field, so the user can begin typing in it directly? If you'd be so kind.
@@ -294,7 +297,7 @@ Here's what this new fancy popup should look like once you tap the "Add todo" bu
 
 ![A white surface with a text field, an 'add' button, and a 'cancel' button.](/assets/images/todo-progress-2.png)
 
-Before we continue, we'll need another asset. Download ![](/assets/images/checkmark.png) [checkmark.png](/assets/images/checkmark.png) and put it in `images/`. Update the top of `main.lua` to publish this asset:
+Before we continue, we'll need another asset. Download ![](/assets/images/checkmark.png) [checkmark.png](/assets/images/checkmark.png) and put it in `images/`. Then, refer to it in `assets` (next to the quit button texture) in order to publish it:
 
 {% highlight lua %}
 assets = {
@@ -401,3 +404,8 @@ We haven't gotten that for yet, though. Watch this space!
 If you made it this far, go eat a cinnamon roll, you deserve it. It's on me. Really, just [ping me on Discord](https://discord.gg/KhdMU6P6Uw) and it's yours. We'd at least love to hear from you, and see your creations.
 
 Once you make your own apps, even if you're not down with cinnamon rolls, do let us know, so we can feature your app in our app browser, blog and tweet about it, etc etc.
+
+## Advanced Concepts
+
+### Running your own server
+If you're feeling ambitious, you can boot a Place of your own using the `docker run -e ALLOPLACE_NAME="my place" -p 21337:21337/udp -it alloverse/alloplace2` command. In the Alloverse connect input, enter the name of the place you just created.
