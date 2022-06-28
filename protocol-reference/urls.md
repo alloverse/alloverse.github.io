@@ -28,18 +28,24 @@ IP, you'll end up at the same placeserv unless you include a custom port in the 
 
 One solution is to use a HTTPS gateway which returns the real alloplace URL given a URL of this form:
 
-`alloplacegw://{host}:{port}/{path}`
+`alloplacegw:http(s)://{host}:{port}/{path}`
 
 Another solution is to have a "load balancer" allplace socket which forwards to an internal instance. This
 solution can use the original `alloplace://` url schema.
 
-## Alloapp (unimplemented)
+## Alloapp
 
-Launching an alloapp from a URL is not implemented yet. Here's how I imagine it working:
+An alloapp is launched with an URL in this format:
 
-`alloapp://{host}:{port}/{path}?{params}`
+`alloapp:http(s)://{host}:{port}/{path}?{params}`
 
-... with HTTP headers for user identity and alloplace to connect to.
+This is a HTTP(S) gateway endpoint which is basically a "CGI launcher". Upon POST, it'll launch an instance of
+the app and connect it to the requested alloplace. Please [read more over on the topic of hosting](/hosting).
 
-This is a HTTPS endpoint which is basically a "CGI launcher". Upon POST, it'll launch an instance of
-the app and connect it to the requested alloplace.
+You can launch this gateway by calling `./allo/assist serve` inside an alloapp.
+
+When an alloplace accesses the above URL, it will fill in these HTTP headers:
+
+* `x-alloverse-server`: The `alloplace:` url of the place that the new app instance shouild connect to
+* `x-alloverse-identity`: The identity blob of the user who requested the app launch
+
