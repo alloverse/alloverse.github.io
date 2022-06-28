@@ -102,7 +102,7 @@ This is also a good point at which to remind you: if you get stuck, or have ques
 
 ## Anatomy of Hello World in the Alloverse
 
-Let’s open up `lua/main.lua` and have a look at the code, to understand what's going on. If you're not much for theory, you may skip this section and get straight to [making an app](#building-our-app).
+Let’s open up `lua/main.lua` and have a look at the code, to understand what's going on. If you're not much for theory, you may skip this section and get straight to [making an app](#building-your-app).
 
 {% highlight lua %}
 local client = Client(
@@ -234,7 +234,7 @@ Fire off a quick `./allo/assist run alloplace://sandbox.places.alloverse.com` in
 
 ![A white surface with a close button in the top right, and an 'add todo' button along the bottom](/assets/images/todo-progress-1.png)
 
-We've created a VR interface, how cool is that!? Just keep in mind that even thought the "Add todo" button is there, it isn't clickable yet. So, let's attach some functionality to it: let's make it create that popup for inputting new todo items.
+We've created a VR interface, how cool is that!? Just keep in mind that while the "Add todo" button is is visible, clicking it will cause the app to crash. So, let's attach some functionality to it: let's make it create that popup for inputting new todo items. Paste the following code block right underneath the `layout()` function:
 
 {% highlight lua %}
 
