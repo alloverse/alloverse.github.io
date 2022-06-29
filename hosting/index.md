@@ -21,12 +21,14 @@ USER's visor.
 
 When you're running an alloapp on your **local development machine**, you have used
 `./allo/assist run alloplace://sandbox.places.alloverse.com` or something similar
-to connect your app directly to a specific place. It's good for debugging, but it
-won't let other users try your app without your first manually launching it.
+to connect your app directly to a specific place. This is good for debugging,
+or for demoing something to someone once. However, it won't let other users
+in other Places launch your app, and also your app will stop running in the Place
+e g when your laptop goes to sleep.
 
-**In production**, you can do `./allo/assist serve` to start a http gateway. When an
-alloplace accesses this gateway, it will execute a new instance of your alloapp,
-and connect it to the alloplace that asked for it. This is how you put your
+**In production**, you can run `./allo/assist serve` on a dedicated server to start
+a http gateway. When an alloplace accesses this gateway, it will start a new instance
+of your alloapp, and connect it to the alloplace that asked for it. This is how you put your
 app properly on the internet, and let other people launch it to their Alloverse
 Places.
 
