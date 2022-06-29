@@ -395,9 +395,7 @@ You know what? I think this is pretty stellar. This'll do nicely. If you dotted 
 
 So, you built your fancy VR app. Now you want to show it off, and deploy it so all the Alloverse users in the world can run it in their places, right?
 
-Our plan is to provide a Dockerfile which sets everything up just right for you, and an `./allo/assist` invocation which deploys it onto Amazon ECS for you. Just a oneliner and it's deployed. Boom.
-
-We haven't gotten that for yet, though. Watch this space!
+Well, you're in luck! Go ahead and learn about [hosting an Alloverse app](/hosting)!
 
 ## Celebration
 
@@ -407,5 +405,5 @@ Once you make your own apps, even if you're not down with cinnamon rolls, do let
 
 ## Advanced Concepts
 
-### Running your own server
+### Running your own Place server
 If you're feeling ambitious, you can boot a Place of your own using the `docker run -e ALLOPLACE_NAME="my place" -p 21337:21337/udp -it alloverse/alloplace2` command. In the Alloverse connect input, enter the name of the place you just created.

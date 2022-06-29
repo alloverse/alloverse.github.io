@@ -1,8 +1,8 @@
 ---
 layout: default
-title: 3D Interface Guidelines
+title: 3D Interface Design Guidelines
 permalink: /hig
-nav_order: 9
+nav_order: 8
 ---
 
 # {{ page.title }}
