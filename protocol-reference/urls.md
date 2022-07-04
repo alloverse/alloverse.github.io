@@ -47,5 +47,5 @@ You can launch this gateway by calling `./allo/assist serve` inside an alloapp.
 When an alloplace accesses the above URL, it will fill in these HTTP headers:
 
 * `x-alloverse-server`: The `alloplace:` url of the place that the new app instance shouild connect to
-* `x-alloverse-identity`: The identity blob of the user who requested the app launch
+* `x-alloverse-launched-by`: The identity blob of the user who requested the app launch
 
