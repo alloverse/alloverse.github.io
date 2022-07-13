@@ -101,6 +101,31 @@ Defines the surface appearance of the component being rendered.
 - `shader_name`: Optional ame of hard-coded shader to use for this object. Currently allows `plain` and `pbr`. Default is `plain`.
 - `texture`: optional texture asset. Default is none.
 
+## skeleton
+
+Configures poses for bone nodes in a rigged mesh. Use this to manually pose/animate the skeleton/bones
+of an entity that has a rigged model as its `geometry`.
+
+```json-doc
+"skeleton": {
+  "nodes": {
+    "{name of node}": { // key is name of node
+      "matrix": [1,0,0,0, 0,1,0,0, ...]],
+      "alpha": 1.0,
+    },
+  }
+}
+```
+* `nodes`: A dictionary of nodes to pose. The key is the name of the node.
+
+The structure of each node dictionary:
+
+* `matrix`: a 4x4 matrix like in `transform` used to position and rotate the node
+* `alpha`: Mix this matrix with the node's default pose. 0.5 means using the half-way
+           point between the two transforms, 1.0 means using only the incoming
+           transform.
+
+
 ## text
 
 Defines a text renderer for this entity, drawing a text texture at `transform`.
