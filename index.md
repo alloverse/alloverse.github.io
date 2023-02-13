@@ -26,10 +26,10 @@ Alloverse is an open platform for collaborative workspaces in 3D. It’s Gibson-
 
 For more information, please see the [Alloverse website](https://www.alloverse.com){:target="_blank"}.
 
-Your "Place" is where you decorate, run apps, invite people, and hang out. It's like a collaborative X11 server: It runs a world simulation server, a voip gateway, and all the backing data for 3d UIs for the running apps. The reference Elixir implementation is in alloplace.
-A "visor" is the GUI application you use to visit places and interact with your apps. allovisor implements such a visor for VR in Unity.
-An "app" is a process running on your computer, or on a computer on the Internet. Like opening a web page (or launching a remote X11 process), this app can then show its interface and be interacted with inside your place.
-The network and "UI protocol" is abstracted into the allonet library, written in C and used by all the above projects.
+* Your "Place" is where you decorate, run apps, invite people, and hang out. A "place" is a server. It's like a collaborative X11 server: It runs a world simulation server, a voip gateway, and all the backing data for 3d UIs for the running apps. (You can check out the [reference implementation on Github](https://github.com/alloverse/alloplace2)).
+* A "visor" is the GUI application you use to visit places and interact with your apps. It's sort of the VR equivalent of a web browser. It's [what you download from our website to get started](https://alloverse.com/download/). ([_its_ reference implementation is of course also on github](https://github.com/alloverse/allovisor).)
+* An "app" or "alloapp" is a process running on a server, which connects to a Place to show its user interface to people interacting with it. It's sort of like a web page or X11 process. We'll be building such an alloapp today.
+* The network and "UI protocol" is taken care of by the [allonet](https://github.com/alloverse/allonet) library, written in C and used by all the above projects.
 
 ## Developing an Alloverse App
 
@@ -37,9 +37,11 @@ An Alloverse app is a server-side app that you run on your own server, similar t
 
 This tutorial will take you through creating an Alloverse app using the Lua programming language, since that is the language we’ve developed the most support for so far.
 
-You can build apps on Mac, Linux or Windows; but for the latter, you’ll need a Unix shell, e g mingw, msys2 or WSL.
+You can build apps on Mac, Linux or Windows. On Windows, you’ll need a Unix shell, preferrably WSL2 (but  mingw/msys2 could also work if you're lucky): [follow this WSL installation guide](https://learn.microsoft.com/en-us/windows/wsl/install) and install Ubuntu.
 
 In contrast to a web framework like Rails or Django, Alloverse doesn’t install any software onto your system. Instead, a project is completely self-contained within its project folder, and contains everything it needs to run.
+
+Note that building alloapps is done completely in text (through VSCode and Terminal), and there are currently no graphical editors (like the scene editor you might be used to from Unity or Unreal).
 
 ## Prerequisites
 
@@ -49,7 +51,7 @@ To write your own Alloverse app, you'll need the following:
 * A terminal app (preinstalled on Mac and Linux, separate install on Windows).
 * A plain text editor for code (We recommend [Visual Studio Code](https://code.visualstudio.com/download){:target="_blank"}).
 * Git (Comes with Xcode on Mac. If you just type `git` into a terminal, it'll ask to install it for you even without Xcode).
-* Only on Windows: Cygwin or MingW (this is a bit of a setup; we recommend doing this on a Mac or Linux).
+* Only on Windows: WSL2 (or if you're up for some manual work, Cygwin or MingW)
 
 ## Running the Alloverse Visor
 
@@ -59,7 +61,7 @@ That's it - you're now inside the Alloverse Sandbox Place, providing you a way t
 
 ## Creating your project
 
-Now, let's create a project folder. Allo Assist requires Git to fetch all its dependencies, so we’ll init a Git repo in the folder. Then we can initialize the alloapp environment into it:
+Now, let's use the terminal to create a project folder, and ask AlloAssist to initialize a base project with all dependencies into it. From your terminal:
 
 {% highlight terminal %}
 $ mkdir allo-todo
@@ -217,7 +219,7 @@ We're using [Penlight's `class` macro](https://stevedonovan.github.io/Penlight/a
 
 We create a constructor, where we set up initial state and controls. Here we want a quit [Button](/doc/classes/Button.html){:target="_blank"}, and an add [Button](/doc/classes/Button.html){:target="_blank"}. We immediately add them as subviews to the TodosView, so they show up in the view hierarchy. For the first button, we use one of our image assets as a texture, and for the other, we set the text on the label instead.
 
-AlloUI doesn't have a comprehensive layout system instead, so we'll call our own `layout` at opportune moments. Let's stub it out so we have something to start with. We'll also create an instance of it, and use it as our app's main view. Paste the following into your code, just below the `_init` function:
+AlloUI doesn't have a comprehensive layout system itself, so we'll call our own `layout` at opportune moments. Let's stub it out so we have something to start with. We'll also create an instance of it, and use it as our app's main view. Paste the following into your code, just below the `_init` function:
 
 {% highlight lua %}
 
@@ -230,7 +232,7 @@ app.mainView = TodosView(ui.Bounds(0, 1.2, -2, 1, 0.5, 0.01))
 
 {% endhighlight %}
 
-Fire off a quick `./allo/assist run alloplace://sandbox.places.alloverse.com` in your terminal, and you'll be presented with this beauty in Alloverse:
+Let's restart your app to see your new code changes. Open the terminal where your app is running, and quit it with ctrl-C. Then, fire off a quick `./allo/assist run alloplace://sandbox.places.alloverse.com` in your terminal, and you'll be presented with this beauty in Alloverse:
 
 ![A white surface with a close button in the top right, and an 'add todo' button along the bottom](/assets/images/todo-progress-1.png)
 
@@ -297,7 +299,7 @@ Here's what this new fancy popup should look like once you tap the "Add todo" bu
 
 ![A white surface with a text field, an 'add' button, and a 'cancel' button.](/assets/images/todo-progress-2.png)
 
-Before we continue, we'll need another asset. Download ![](/assets/images/checkmark.png) [checkmark.png](/assets/images/checkmark.png) and put it in `images/`. Then, refer to it in `assets` (next to the quit button texture) in order to publish it:
+Before we continue, we'll need another asset. Download ![](/assets/images/checkmark.png) [checkmark.png](/assets/images/checkmark.png) and put it in `images/`. Then we'll have to refer to it from code. At the top of your file, you're already loading the `quit` texture asset. Modify that block to also load and publish the `checkmark` texture, by making the code block look like this:
 
 {% highlight lua %}
 assets = {
@@ -306,7 +308,7 @@ assets = {
 }
 {% endhighlight %}
 
-Cool. Cool cool cool. Let's make it actually possible to add todo items, yeah?
+Cool. Cool cool cool. Let's make it actually possible to add todo items, yeah? Add these two functions below your existing ones:
 
 {% highlight lua %}
 function TodosView:addTodo(text)
@@ -350,7 +352,7 @@ This should start to look familiar.
 
 `removeTodo` just finds the given item in the list, and removes it from both the list and the UI, running a relayouting pass to adjust the other items' positions.
 
-That's awesome! We can now add and remove todo list items! Just one bummer: they all end up stacked on top of each other. We'll need to lay them out before this is usable. Let's replace our dummy `layout` with something better.
+That's awesome! We can now add and remove todo list items! Just one bummer: they all end up stacked on top of each other. We'll need to lay them out before this is usable. Let's replace our dummy `layout` with something better. Remove the existing contents of your `layout` function, and type in this:
 
 {% highlight lua %}
 function TodosView:layout()
@@ -407,3 +409,7 @@ Once you make your own apps, even if you're not down with cinnamon rolls, do let
 
 ### Running your own Place server
 If you're feeling ambitious, you can boot a Place of your own using the `docker run -e ALLOPLACE_NAME="my place" -p 21337:21337/udp -it alloverse/alloplace2` command. In the Alloverse connect input, enter the name of the place you just created.
+
+### Building something more advanced
+
+* [How to build a VR retro arcade](https://alloverse.com/2022/02/03/how-to-make-a-retro-arcade-in-a-week-101/) on our blog steps you through building a SNES emulator in VR.
