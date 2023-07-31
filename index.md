@@ -51,6 +51,7 @@ To write your own Alloverse app, you'll need the following:
 * A terminal app (preinstalled on Mac and Linux, separate install on Windows).
 * A plain text editor for code (We recommend [Visual Studio Code](https://code.visualstudio.com/download){:target="_blank"}).
 * Git (Comes with Xcode on Mac. If you just type `git` into a terminal, it'll ask to install it for you even without Xcode).
+* [Git Large File Storage](https://git-lfs.com)
 * Only on Windows: WSL2 (or if you're up for some manual work, Cygwin or MingW)
 
 ## Running the Alloverse Visor
