@@ -101,3 +101,14 @@ code {
     margin: 1em;
   }
 }
+
+// Alloverse 2 notice
+.allo2-notice { box-sizing: border-box; font-family: "Open Sans", sans-serif; color: #0c2b48; }
+.allo2-notice p { margin: 0 0 0.6em; }
+.allo2-notice p:last-child { margin-bottom: 0; }
+.allo2-notice a { color: #d488c6; text-decoration: underline; text-underline-offset: 2px; }
+.allo2-notice a:hover { color: #0c2b48; }
+.allo2-notice h2.allo2-title { font-family: "Sen", sans-serif; font-weight: 800; font-size: 26px; line-height: 1.25; margin: 0 0 0.5em; color: #0c2b48; letter-spacing: 0; }
+.allo2-card { position: relative; max-width: 760px; margin: 48px auto; padding: 28px 32px 28px 36px; background: #EAF6FF; border-radius: 20px; font-size: 17px; line-height: 1.65; }
+.allo2-card::before { content: ""; position: absolute; left: 0; top: 24px; bottom: 24px; width: 6px; border-radius: 0 6px 6px 0; background: #d488c6; }
+@media (max-width: 800px) { .allo2-card { margin: 32px 16px; padding: 22px 20px 22px 26px; font-size: 16px; } }
